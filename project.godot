@@ -11,8 +11,20 @@ config_version=5
 [application]
 
 config/name="tower_defense_game"
+run/main_scene="uid://dllg7m8c3b27q"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Globals="*res://scripts/globals.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/initial_position=Vector2i(500, 500)
+window/stretch/mode="viewport"
 
 [rendering]
 
