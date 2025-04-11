@@ -1,6 +1,5 @@
 extends Node
 
-
 var _resolution = Vector2(1280, 720)
 
 func _ready() -> void:
