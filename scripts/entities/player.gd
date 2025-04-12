@@ -3,16 +3,29 @@ extends Entity
 @onready var sprites: Node2D = $Sprites
 @onready var player_sprite: AnimatedSprite2D = $Sprites/PlayerSprite
 
+
+
 # Parameters
 var dash_speed = 1600
 var dash_frames = 12
+
+var jump_frames = 45
+var jump_accel = 40
+
+var invincible_frames = 60
+
 var SPEED = 400
 var acceleration = 120
 
+var stamina = 60
 
 # State
 var is_dashing = false
 var is_jumping = false
+
+var jump_progress = 0
+
+var invincible_progress = 0
 
 var dash_direc = Vector2()
 var dash_progress = 0
@@ -30,8 +43,15 @@ func handle_dash():
     else:
         dash_progress -= 1
 
-func handle_jump():
-    pass
+func handle_jump(delta: float):
+    if move_direc.length() != 0:
+        velocity = velocity.move_toward(move_direc * SPEED, jump_accel * delta * 60)
+    
+    if jump_progress == 0:
+        is_jumping = false
+    else:
+        jump_progress -= 1
+
 
 # handles general movement
 func handle_general(delta: float):
@@ -48,6 +68,10 @@ func handle_sprites():
     if run_check and !is_dashing and !is_jumping and current_animation != "run":
         current_animation = "run"
         player_sprite.play("run")
+    
+    if is_jumping and current_animation != "jump":
+        current_animation = "jump"
+        player_sprite.play("jump")
 
 func handle_input(delta: float):
     # Handle looking
@@ -73,10 +97,18 @@ func handle_input(delta: float):
     
     move_direc = move_direc.normalized()
     
-    if Input.is_action_just_pressed("dash") and !is_dashing and !is_jumping:
+    if Input.is_action_just_pressed("dash") and !is_dashing and !is_jumping and stamina >= 48:
+        stamina -= 48
         is_dashing = true
         dash_direc = move_direc
         dash_progress = dash_frames
+    
+    if Input.is_action_just_pressed("jump") and !is_jumping:
+        is_jumping = true
+        is_dashing = false
+        dash_progress = 0
+        dash_direc = Vector2()
+        jump_progress = jump_frames
     
 
 func _physics_process(delta: float) -> void:
@@ -87,9 +119,12 @@ func _physics_process(delta: float) -> void:
     if is_dashing:
         handle_dash()
     elif is_jumping:
-        handle_jump()
+        handle_jump(delta)
     else:
         handle_general(delta)
+    
+    if stamina < 60:
+        stamina += 1
     
     move_and_slide()
     
