@@ -14,7 +14,7 @@ var level
 @onready var weapon_icon: TextureRect = $InGameUI/WeaponIcon
 @onready var ammo_count: Label = $InGameUI/AmmoCount
 @onready var start_wave: Button = $InGameUI/StartWave
-@onready var tower_panel: PanelContainer = $InGameUI/PanelContainer
+@onready var tower_info: PanelContainer = $InGameUI/TowerInfo
 
 const SHOTGUN_ICON = preload("res://assets/images/ui/shotgun_icon.png")
 const MG_ICON = preload("res://assets/images/ui/mg_icon.png")
@@ -61,4 +61,4 @@ func _on_start_wave_pressed() -> void:
 func _input(event):
 	if Input.is_action_just_pressed("prev_tower"):
 		print("right click")
-		tower_panel.visible = true
+		tower_info.visible = true
