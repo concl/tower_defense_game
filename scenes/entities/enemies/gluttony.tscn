@@ -84,6 +84,7 @@ animations = [{
 scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_m4fsh")
 animation = &"jump"
-frame_progress = 0.464743
+frame = 7
+frame_progress = 0.0549397
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

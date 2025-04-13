@@ -4,6 +4,7 @@ const LEVEL = preload("res://scenes/levels/test_level.tscn")
 
 @onready var main: Control = $Main
 @onready var settings: Control = $Settings
+@onready var how_to_play: Control = $HowToPlay
 
 func _on_quit_pressed() -> void:
     get_tree().quit()
@@ -29,3 +30,14 @@ func _on_back_pressed() -> void:
 func _on_new_game_pressed() -> void:
     get_tree().change_scene_to_packed(LEVEL)
     
+
+
+func _on_how_to_play_pressed() -> void:
+    main.hide()
+    how_to_play.show()
+    
+
+
+func _on_back_2_pressed() -> void:
+    how_to_play.hide()
+    main.show()
