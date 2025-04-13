@@ -36,6 +36,7 @@ offset_right = 496.0
 offset_bottom = 88.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 50
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -44,6 +45,7 @@ text = "GAME OVER"
 
 [node name="MainMenu" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Main Menu"
 
 [connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

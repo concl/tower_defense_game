@@ -1,22 +1,26 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://8v8xgpdy1iuh"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://8v8xgpdy1iuh"]
 
 [ext_resource type="FontFile" uid="uid://cvsjr4ah2idg6" path="res://assets/fonts/PixelOperator8.ttf" id="1_3jc4x"]
-[ext_resource type="Texture2D" uid="uid://ckkl5r1wslkmv" path="res://assets/images/ui/button.png" id="2_6lotc"]
-[ext_resource type="Texture2D" uid="uid://r7fri5cffd6u" path="res://assets/images/ui/button_pressed.png" id="3_ff7ft"]
+[ext_resource type="Texture2D" uid="uid://ckkl5r1wslkmv" path="res://assets/images/ui/button.png" id="2_ff7ft"]
+[ext_resource type="Texture2D" uid="uid://r7fri5cffd6u" path="res://assets/images/ui/button_pressed.png" id="3_624bp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h153x"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ff7ft"]
-texture = ExtResource("2_6lotc")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 25.0
+texture = ExtResource("2_ff7ft")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tvrs4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_624bp"]
-texture = ExtResource("3_ff7ft")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
+texture = ExtResource("3_624bp")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
 [resource]
 default_font = ExtResource("1_3jc4x")
@@ -39,7 +43,8 @@ Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/fonts/font = ExtResource("1_3jc4x")
-Button/styles/focus = SubResource("StyleBoxTexture_ff7ft")
+Button/styles/focus = SubResource("StyleBoxEmpty_h153x")
 Button/styles/hover = SubResource("StyleBoxTexture_ff7ft")
+Button/styles/hover_pressed = SubResource("StyleBoxEmpty_tvrs4")
 Button/styles/normal = SubResource("StyleBoxTexture_ff7ft")
 Button/styles/pressed = SubResource("StyleBoxTexture_624bp")

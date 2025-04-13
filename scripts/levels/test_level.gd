@@ -89,8 +89,7 @@ func start_wave():
     
     
 func _ready():
-    Globals.add_ui()
-    Globals.ui.player = player
+    Globals.add_ui(player)
     start_wave()
 
 func _physics_process(delta: float) -> void:

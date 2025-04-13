@@ -1,9 +1,13 @@
 extends Entity
 
+class_name Player
+
 @onready var sprites: Node2D = $Sprites
 @onready var player_sprite: AnimatedSprite2D = $Sprites/PlayerSprite
 @onready var front_sprite: AnimatedSprite2D = $Sprites/FrontSprite
 @onready var back_sprite: AnimatedSprite2D = $Sprites/BackSprite
+
+
 
 const CAR_LASER = preload("res://scenes/entities/projectiles/car_laser.tscn")
 
@@ -27,7 +31,7 @@ var acceleration = 120
 
 var max_stamina = 90
 
-var weapon_cooldowns = [60, 12, 120]
+var weapon_cooldowns = Vector3i(60, 12, 120)
 
 # State
 var stamina = 90
@@ -45,17 +49,14 @@ var dash_progress = 0
 var move_direc = Vector2()
 
 var current_weapon = SHOTGUN
-var cooldown_progress = [0,0,0]
+var cooldown_progress = Vector3i(0,0,0)
+var ammo = Vector3i(12, 90, 10)
 
 # Animation
 var current_animation = "idle"
 
-func mod_by(x, m):
-    var res = x % m
-    if res < 0:
-        res += m
-        res %= m
-    return res
+func die():
+    Globals.trigger_death()
 
 func handle_dash():
     velocity = dash_direc * dash_speed
@@ -80,10 +81,10 @@ func handle_general(delta: float):
 
 func handle_attack():
     
-    if current_weapon == SHOTGUN:
+    if current_weapon == SHOTGUN and ammo[SHOTGUN] > 0:
+        ammo[SHOTGUN] -= 1
         cooldown_progress[SHOTGUN] = weapon_cooldowns[SHOTGUN]
         for x in range(10):
-            print("test")
             var laser = CAR_LASER.instantiate()
             var mouse_pos = get_global_mouse_position()
             
@@ -97,10 +98,10 @@ func handle_attack():
             direction = direction.rotated(random_angle)
             laser.linear_velocity = direction * 2000
             laser.global_position = self.global_position
-            print(atan2(direction.y, direction.x))
             laser.rotation = atan2(direction.y, direction.x)
             get_tree().current_scene.add_child(laser)
-    elif current_weapon == MG:
+    elif current_weapon == MG and ammo[MG] > 0:
+        ammo[MG] -= 1
         cooldown_progress[MG] = weapon_cooldowns[MG]
         var laser = CAR_LASER.instantiate()
         var mouse_pos = get_global_mouse_position()
@@ -111,11 +112,10 @@ func handle_attack():
         else:
             direction = Vector2(1,0)
         
-        var random_angle = randf_range(-0.02, 0.02)
+        var random_angle = randf_range(-0.05, 0.05)
         direction = direction.rotated(random_angle)
         laser.linear_velocity = direction * 2000
         laser.global_position = self.global_position
-        print(atan2(direction.y, direction.x))
         laser.rotation = atan2(direction.y, direction.x)
         get_tree().current_scene.add_child(laser)
 
@@ -258,9 +258,9 @@ func _physics_process(delta: float) -> void:
     else:
         handle_general(delta)
     
-    for i in range(cooldown_progress.size()):
-        if cooldown_progress[i] > 0:
-            cooldown_progress[i] -= 1
+    
+    cooldown_progress -= Vector3i(1,1,1)
+    cooldown_progress = cooldown_progress.max(Vector3i())
     
     if stamina < max_stamina:
         stamina += 1
