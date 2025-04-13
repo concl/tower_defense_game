@@ -1,7 +1,10 @@
-[gd_scene format=3 uid="uid://cucy3b7eagd5a"]
+[gd_scene load_steps=2 format=3 uid="uid://cucy3b7eagd5a"]
+
+[ext_resource type="Texture2D" uid="uid://b8arslvakme8a" path="res://assets/images/yarn.png" id="1_662ui"]
 
 [node name="Yarn" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_662ui")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

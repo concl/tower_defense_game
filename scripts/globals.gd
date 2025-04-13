@@ -25,8 +25,8 @@ func _ready() -> void:
     DisplayServer.window_set_size(Globals._resolution)
     
 
-func add_ui(player):
-    ui = MainUI.create(player)
+func add_ui(player, level):
+    ui = MainUI.create(player, level)
     add_child(ui)
 
 

@@ -5,6 +5,9 @@ extends Node2D
 @onready var main_path: Path2D = $Paths/MainPath
 @onready var flank_path: Path2D = $Paths/FlankPath
 
+signal wave_started
+signal wave_ended
+
 var current_wave = -1
 
 var wave_in_progress = false
@@ -42,6 +45,8 @@ func handle_spawns():
 
     if queued_spawn == "":
         if subwave >= current_subwaves.size():
+            # Wave ended
+            wave_ended.emit()
             wave_in_progress = false
             subwave = 0
             return
@@ -85,12 +90,12 @@ func handle_spawns():
 func start_wave():
     wave_in_progress = true
     current_wave += 1
-    
+    if current_wave < waves.size():
+        wave_started.emit()
     
     
 func _ready():
-    Globals.add_ui(player)
-    start_wave()
+    Globals.add_ui(player, self)
 
 func _physics_process(delta: float) -> void:
     
