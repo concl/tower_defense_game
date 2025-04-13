@@ -8,7 +8,6 @@ class_name Player
 @onready var back_sprite: AnimatedSprite2D = $Sprites/BackSprite
 
 
-
 const CAR_LASER = preload("res://scenes/entities/projectiles/car_laser.tscn")
 
 enum {
@@ -57,6 +56,10 @@ var current_animation = "idle"
 
 func die():
     Globals.trigger_death()
+
+func is_mouse_over_ui() -> bool:
+    var hovered_control = get_viewport().gui_get_hovered_control()
+    return hovered_control is Button
 
 func handle_dash():
     velocity = dash_direc * dash_speed
@@ -242,7 +245,7 @@ func handle_input(delta: float):
             current_weapon = 1
         
     
-    if Input.is_action_pressed("attack") and cooldown_progress[current_weapon] == 0:
+    if Input.is_action_pressed("attack") and cooldown_progress[current_weapon] == 0  and !is_mouse_over_ui():
         handle_attack()
     
 

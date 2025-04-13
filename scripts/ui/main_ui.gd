@@ -22,6 +22,7 @@ static func create(player, level) -> MainUI:
     var instance = MAIN_UI_SCENE.instantiate()
     instance.player = player
     instance.level = level
+    
     return instance
 
 
