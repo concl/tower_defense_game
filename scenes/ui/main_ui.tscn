@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bb0xty80owtkt"]
+[gd_scene load_steps=3 format=3 uid="uid://bb0xty80owtkt"]
 
 [ext_resource type="Script" uid="uid://c1g127ovob3nc" path="res://scripts/globals.gd" id="1_hnesk"]
+[ext_resource type="Theme" uid="uid://8v8xgpdy1iuh" path="res://assets/themes/menu_theme.tres" id="2_hcnxy"]
 
 [node name="MainUI" type="CanvasLayer"]
 script = ExtResource("1_hnesk")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_hcnxy")
