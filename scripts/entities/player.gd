@@ -2,11 +2,12 @@ extends Entity
 
 @onready var sprites: Node2D = $Sprites
 @onready var player_sprite: AnimatedSprite2D = $Sprites/PlayerSprite
-
+@onready var front_sprite: AnimatedSprite2D = $Sprites/FrontSprite
+@onready var back_sprite: AnimatedSprite2D = $Sprites/BackSprite
 
 
 # Parameters
-var dash_speed = 1600
+var dash_speed = 1200
 var dash_frames = 12
 
 var jump_frames = 45
@@ -17,9 +18,11 @@ var invincible_frames = 60
 var SPEED = 400
 var acceleration = 120
 
-var stamina = 60
+var max_stamina = 90
 
 # State
+var stamina = 90
+
 var is_dashing = false
 var is_jumping = false
 
@@ -59,27 +62,82 @@ func handle_general(delta: float):
     
 
 func handle_sprites():
+    
+    # Handle looking
+    var mouse_pos = get_global_mouse_position()
+    var relative_pos = mouse_pos - self.global_position
+    
+    if !is_dashing:
+        if relative_pos.y <= relative_pos.x and relative_pos.y >= -relative_pos.x:
+            sprites.scale.x = -abs(sprites.scale.x)  # Flip horizontally if on the left side
+            player_sprite.show()
+            front_sprite.hide()
+            back_sprite.hide()
+        elif relative_pos.y >= relative_pos.x and relative_pos.y >= -relative_pos.x:
+            sprites.scale.x = abs(sprites.scale.x)
+            player_sprite.hide()
+            front_sprite.show()
+            back_sprite.hide()
+        elif relative_pos.y >= relative_pos.x and relative_pos.y <= -relative_pos.x:
+            sprites.scale.x = abs(sprites.scale.x)
+            player_sprite.show()
+            front_sprite.hide()
+            back_sprite.hide()
+        else:
+            sprites.scale.x = abs(sprites.scale.x)
+            player_sprite.hide()
+            front_sprite.hide()
+            back_sprite.show()
+    
     var run_check = move_direc.length() > 0
     
     if !run_check and !is_dashing and !is_jumping and current_animation != "idle":
         current_animation = "idle"
         player_sprite.play("idle")
+        front_sprite.play("idle")
+        back_sprite.play("idle")
     
     if run_check and !is_dashing and !is_jumping and current_animation != "run":
         current_animation = "run"
         player_sprite.play("run")
+        front_sprite.play("run")
+        back_sprite.play("run")
+        
     
     if is_jumping and current_animation != "jump":
         current_animation = "jump"
         player_sprite.play("jump")
+        front_sprite.play("jump")
+        back_sprite.play("jump")
+    
+    if is_dashing and current_animation != "dash":
+        current_animation = "dash"
+        player_sprite.play("dash")
+        front_sprite.play("dash")
+        back_sprite.play("dash")
+        
+        if dash_direc.x < 0:
+            sprites.scale.x = abs(sprites.scale.x)
+            player_sprite.show()
+            front_sprite.hide()
+            back_sprite.hide()
+        elif dash_direc.x > 0:
+            sprites.scale.x = -abs(sprites.scale.x)
+            player_sprite.show()
+            front_sprite.hide()
+            back_sprite.hide()
+        else:
+            if dash_direc.y > 0:
+                player_sprite.hide()
+                front_sprite.show()
+                back_sprite.hide()
+            else:
+                player_sprite.hide()
+                front_sprite.hide()
+                back_sprite.show()
+
 
 func handle_input(delta: float):
-    # Handle looking
-    var mouse_pos = get_global_mouse_position()
-    if mouse_pos.x > self.global_position.x:
-        sprites.scale.x = -abs(sprites.scale.x)  # Flip horizontally if on the left side
-    else:
-        sprites.scale.x = abs(sprites.scale.x)  # No flip if on the right side
     
     # Handle movement direction
     move_direc = Vector2(0,0)
@@ -97,13 +155,18 @@ func handle_input(delta: float):
     
     move_direc = move_direc.normalized()
     
-    if Input.is_action_just_pressed("dash") and !is_dashing and !is_jumping and stamina >= 48:
-        stamina -= 48
+    if Input.is_action_just_pressed("dash") \
+    and !is_dashing \
+    and !is_jumping \
+    and move_direc.length() > 0 \
+    and stamina >= 60:
+        stamina -= 60
         is_dashing = true
         dash_direc = move_direc
         dash_progress = dash_frames
     
-    if Input.is_action_just_pressed("jump") and !is_jumping:
+    if Input.is_action_just_pressed("jump") and !is_jumping and stamina >= 30:
+        stamina -= 30
         is_jumping = true
         is_dashing = false
         dash_progress = 0
@@ -123,7 +186,7 @@ func _physics_process(delta: float) -> void:
     else:
         handle_general(delta)
     
-    if stamina < 60:
+    if stamina < max_stamina:
         stamina += 1
     
     move_and_slide()

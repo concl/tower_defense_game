@@ -193,7 +193,7 @@ target_path = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_yautc")]
 z_index = 1
-position = Vector2(1120, 592)
+position = Vector2(415, 188)
 
 [node name="Path2D" type="Path2D" parent="."]
 scale = Vector2(2.5, 2.5)
