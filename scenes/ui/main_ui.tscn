@@ -125,4 +125,11 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Start Wave"
 
+[node name="PanelContainer" type="PanelContainer" parent="InGameUI"]
+visible = false
+layout_mode = 0
+offset_left = 1639.0
+offset_right = 1920.0
+offset_bottom = 1024.0
+
 [connection signal="pressed" from="InGameUI/StartWave" to="." method="_on_start_wave_pressed"]

@@ -8,10 +8,10 @@ var progress = 0
 
 
 func attack():
-    pass
-    
+	pass
+	
 
 func _physics_process(delta: float) -> void:
-    if progress == 0:
-        pass
-        
+	if progress == 0:
+		pass
+		
