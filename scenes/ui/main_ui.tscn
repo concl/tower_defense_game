@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb0xty80owtkt"]
+[gd_scene load_steps=8 format=3 uid="uid://bb0xty80owtkt"]
 
-[ext_resource type="Script" uid="uid://c1g127ovob3nc" path="res://scripts/globals.gd" id="1_hnesk"]
+[ext_resource type="Script" uid="uid://b1cwmv3craqjq" path="res://scripts/ui/main_ui.gd" id="1_travt"]
 [ext_resource type="Theme" uid="uid://8v8xgpdy1iuh" path="res://assets/themes/menu_theme.tres" id="2_hcnxy"]
+[ext_resource type="Texture2D" uid="uid://bmn4ycn8he3ju" path="res://assets/images/ui/health_bar.png" id="3_l8t6x"]
+[ext_resource type="Texture2D" uid="uid://tfrgp046jsbo" path="res://assets/images/ui/health_progress.png" id="4_travt"]
+[ext_resource type="Texture2D" uid="uid://d3r2jd62l6yah" path="res://assets/images/ui/stamina_bar.png" id="5_46cp5"]
+[ext_resource type="Texture2D" uid="uid://de8n15i7gs8gl" path="res://assets/images/ui/stamina_progress.png" id="6_b1beo"]
+[ext_resource type="Texture2D" uid="uid://dp0vxmluo3pm3" path="res://assets/images/ui/boss_bar.png" id="7_t0li6"]
 
 [node name="MainUI" type="CanvasLayer"]
-script = ExtResource("1_hnesk")
+script = ExtResource("1_travt")
 
-[node name="UI" type="Control" parent="."]
+[node name="InGameUI" type="Control" parent="."]
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,3 +20,71 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_hcnxy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameUI"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 89.625
+offset_bottom = 60.0
+scale = Vector2(6, 6)
+
+[node name="MarginContainer" type="MarginContainer" parent="InGameUI/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="InGameUI/VBoxContainer/MarginContainer"]
+layout_mode = 2
+value = 100.0
+texture_over = ExtResource("3_l8t6x")
+texture_progress = ExtResource("4_travt")
+texture_progress_offset = Vector2(15, 6)
+
+[node name="Label" type="Label" parent="InGameUI/VBoxContainer/MarginContainer/HealthBar"]
+layout_mode = 2
+offset_left = 17.0
+offset_top = 6.0
+offset_right = 85.0
+offset_bottom = 14.0
+scale = Vector2(0.625, 0.625)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 8
+text = "100"
+
+[node name="StaminaBar" type="TextureProgressBar" parent="InGameUI/VBoxContainer"]
+layout_mode = 2
+max_value = 90.0
+value = 90.0
+texture_over = ExtResource("5_46cp5")
+texture_progress = ExtResource("6_b1beo")
+texture_progress_offset = Vector2(19, 7)
+
+[node name="BossBar" type="TextureProgressBar" parent="InGameUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -308.0
+offset_top = 1.0
+offset_right = -231.0
+offset_bottom = 41.0
+grow_horizontal = 2
+scale = Vector2(8, 8)
+max_value = 1000.0
+value = 1000.0
+texture_over = ExtResource("7_t0li6")
+texture_progress = ExtResource("4_travt")
+texture_progress_offset = Vector2(22, 11)
+
+[node name="WeaponIcon" type="TextureRect" parent="InGameUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -180.0
+offset_right = 36.0
+offset_bottom = -164.0
+grow_vertical = 0
+scale = Vector2(10, 10)

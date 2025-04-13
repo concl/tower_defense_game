@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://dikdyq0kefimx"]
+
+[ext_resource type="Texture2D" uid="uid://bgdwnol5e2dgv" path="res://assets/images/james_jump.png" id="1_dsogk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsogk"]
+atlas = ExtResource("1_dsogk")
+region = Rect2(0, 0, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ujhh"]
+atlas = ExtResource("1_dsogk")
+region = Rect2(40, 0, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fgre"]
+atlas = ExtResource("1_dsogk")
+region = Rect2(80, 0, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uq8ac"]
+atlas = ExtResource("1_dsogk")
+region = Rect2(0, 120, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i18pd"]
+atlas = ExtResource("1_dsogk")
+region = Rect2(40, 120, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyoii"]
+atlas = ExtResource("1_dsogk")
+region = Rect2(80, 120, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0x4fx"]
+atlas = ExtResource("1_dsogk")
+region = Rect2(0, 240, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igcrs"]
+atlas = ExtResource("1_dsogk")
+region = Rect2(40, 240, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdlyi"]
+atlas = ExtResource("1_dsogk")
+region = Rect2(80, 240, 40, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m4fsh"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsogk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ujhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fgre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uq8ac")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_i18pd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyoii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0x4fx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igcrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdlyi")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 12.0
+}]
+
+[node name="Gluttony" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_m4fsh")
+animation = &"jump"
+frame_progress = 0.464743
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

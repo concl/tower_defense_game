@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dka6uh0cx2cve"]
+
+[ext_resource type="Script" uid="uid://bclkycs7pxdy6" path="res://scripts/entities/track_follower.gd" id="1_ch717"]
+
+[node name="TrackFollower" type="PathFollow2D"]
+rotates = false
+loop = false
+script = ExtResource("1_ch717")

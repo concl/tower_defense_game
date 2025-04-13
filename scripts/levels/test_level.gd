@@ -1,32 +1,100 @@
 extends Node2D
 
-var current_wave = 0
+@onready var player: CharacterBody2D = $Player
+@onready var health_bar: TextureProgressBar = $InGameUI/HealthBar
+@onready var main_path: Path2D = $Paths/MainPath
+@onready var flank_path: Path2D = $Paths/FlankPath
+
+var current_wave = -1
 
 var wave_in_progress = false
+var subwave = 0
+var subwave_number = 0
 
 var queue_progress = 0
 var queued_spawn: String = ""
+var queued_spawnpoint = 0
 
-const enemy_types = {
+const TRACK_FOLLOWER = preload("res://scenes/entities/track_follower.tscn")
+const ENEMY_TYPES = {
     "test_enemy": preload("res://scenes/entities/enemies/test_enemy.tscn")
 }
 
-@export var waves = [[{"enemy": "test_enemy", "amount": 10}]]
+# Each element of waves is a list which contains dictionaries that describes subwaves
+# A subwave dictionary contains the type of the enemy, the amount of the enemy,
+# the spacing (in frames) between each enemy, and the spawnpoint (0 for the main 
+# spawnpoint and 1 for the flank spawnpoint)
 
+var waves: Array = [
+    [
+        {"enemy": "test_enemy", "amount": 20, "spacing": 20, "spawnpoint": 0},
+        {"enemy": "test_enemy", "amount": 20, "spacing": 20, "spawnpoint": 1},
+    ]
+]
 
 
 func handle_spawns():
-    pass
+    if current_wave >= waves.size():
+        wave_in_progress = false
+        return
+
+    var current_subwaves = waves[current_wave]
+
+    if queued_spawn == "":
+        if subwave >= current_subwaves.size():
+            wave_in_progress = false
+            subwave = 0
+            return
+
+        var current_subwave = current_subwaves[subwave]
+
+        queued_spawn = current_subwave["enemy"]
+        queue_progress = current_subwave["spacing"]
+        queued_spawnpoint = current_subwave["spawnpoint"]
+        subwave_number = current_subwave["amount"]
+
+    if queue_progress > 0:
+        queue_progress -= 1
+    else:
+        var enemy_scene = ENEMY_TYPES.get(queued_spawn)
+        if enemy_scene:
+            var enemy_instance = enemy_scene.instantiate()
+
+            var spawn_path = main_path if queued_spawnpoint == 0 else flank_path
+
+            if enemy_instance.TRACK:
+                var path_follow = TRACK_FOLLOWER.instantiate()
+                spawn_path.add_child(path_follow)
+                path_follow.add_child(enemy_instance)
+                path_follow.payload = enemy_instance
+                path_follow.progress = 0
+            else:
+                add_child(enemy_instance)
+                enemy_instance.global_position = spawn_path.curve.get_point_position(0)
+
+        subwave_number -= 1
+
+        if subwave_number > 0:
+            queue_progress = current_subwaves[subwave]["spacing"]
+        else:
+            queued_spawn = ""
+            subwave += 1
+            
     
 
 func start_wave():
-    pass
+    wave_in_progress = true
+    current_wave += 1
+    
     
     
 func _ready():
+    Globals.add_ui()
+    Globals.ui.player = player
     start_wave()
 
 func _physics_process(delta: float) -> void:
     
     if wave_in_progress:
         handle_spawns()
+    

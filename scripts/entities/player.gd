@@ -5,6 +5,13 @@ extends Entity
 @onready var front_sprite: AnimatedSprite2D = $Sprites/FrontSprite
 @onready var back_sprite: AnimatedSprite2D = $Sprites/BackSprite
 
+const CAR_LASER = preload("res://scenes/entities/projectiles/car_laser.tscn")
+
+enum {
+    SHOTGUN=0,
+    MG=1,
+    RL=2,
+}
 
 # Parameters
 var dash_speed = 1200
@@ -19,6 +26,8 @@ var SPEED = 400
 var acceleration = 120
 
 var max_stamina = 90
+
+var weapon_cooldowns = [60, 12, 120]
 
 # State
 var stamina = 90
@@ -35,9 +44,18 @@ var dash_progress = 0
 
 var move_direc = Vector2()
 
+var current_weapon = SHOTGUN
+var cooldown_progress = [0,0,0]
+
 # Animation
 var current_animation = "idle"
 
+func mod_by(x, m):
+    var res = x % m
+    if res < 0:
+        res += m
+        res %= m
+    return res
 
 func handle_dash():
     velocity = dash_direc * dash_speed
@@ -59,7 +77,48 @@ func handle_jump(delta: float):
 # handles general movement
 func handle_general(delta: float):
     velocity = velocity.move_toward(move_direc * SPEED, acceleration * delta * 60)
+
+func handle_attack():
     
+    if current_weapon == SHOTGUN:
+        cooldown_progress[SHOTGUN] = weapon_cooldowns[SHOTGUN]
+        for x in range(10):
+            print("test")
+            var laser = CAR_LASER.instantiate()
+            var mouse_pos = get_global_mouse_position()
+            
+            var direction = mouse_pos - self.global_position
+            if direction.length() != 0:
+                direction = direction.normalized()
+            else:
+                direction = Vector2(1,0)
+            
+            var random_angle = randf_range(-0.1, 0.1)
+            direction = direction.rotated(random_angle)
+            laser.linear_velocity = direction * 2000
+            laser.global_position = self.global_position
+            print(atan2(direction.y, direction.x))
+            laser.rotation = atan2(direction.y, direction.x)
+            get_tree().current_scene.add_child(laser)
+    elif current_weapon == MG:
+        cooldown_progress[MG] = weapon_cooldowns[MG]
+        var laser = CAR_LASER.instantiate()
+        var mouse_pos = get_global_mouse_position()
+        
+        var direction = mouse_pos - self.global_position
+        if direction.length() != 0:
+            direction = direction.normalized()
+        else:
+            direction = Vector2(1,0)
+        
+        var random_angle = randf_range(-0.02, 0.02)
+        direction = direction.rotated(random_angle)
+        laser.linear_velocity = direction * 2000
+        laser.global_position = self.global_position
+        print(atan2(direction.y, direction.x))
+        laser.rotation = atan2(direction.y, direction.x)
+        get_tree().current_scene.add_child(laser)
+
 
 func handle_sprites():
     
@@ -173,6 +232,19 @@ func handle_input(delta: float):
         dash_direc = Vector2()
         jump_progress = jump_frames
     
+    if Input.is_action_just_pressed("next_weapon"):
+        current_weapon += 1
+        current_weapon %= 2
+    
+    if Input.is_action_just_pressed("prev_weapon"):
+        current_weapon -= 1
+        if current_weapon < 0:
+            current_weapon = 1
+        
+    
+    if Input.is_action_pressed("attack") and cooldown_progress[current_weapon] == 0:
+        handle_attack()
+    
 
 func _physics_process(delta: float) -> void:
     handle_input(delta)
@@ -186,8 +258,14 @@ func _physics_process(delta: float) -> void:
     else:
         handle_general(delta)
     
+    for i in range(cooldown_progress.size()):
+        if cooldown_progress[i] > 0:
+            cooldown_progress[i] -= 1
+    
     if stamina < max_stamina:
         stamina += 1
     
     move_and_slide()
-    
+
+func _ready():
+    health = 100  

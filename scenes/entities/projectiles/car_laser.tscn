@@ -1,3 +1,31 @@
-[gd_scene format=3 uid="uid://d2mwpnqmaqsy7"]
+[gd_scene load_steps=4 format=3 uid="uid://d2mwpnqmaqsy7"]
 
-[node name="CarLaser" type="Node2D"]
+[ext_resource type="Script" uid="uid://dg8koltv7k4qj" path="res://scripts/entities/projectiles/car_laser.gd" id="1_liwuy"]
+[ext_resource type="Texture2D" uid="uid://cn3836bht08yx" path="res://assets/images/laser.png" id="1_rktwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rktwn"]
+size = Vector2(12, 5)
+
+[node name="CarLaser" type="RigidBody2D"]
+gravity_scale = 0.0
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("1_liwuy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 2)
+texture = ExtResource("1_rktwn")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(4, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_rktwn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

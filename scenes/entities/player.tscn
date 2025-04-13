@@ -21,13 +21,13 @@ size = Vector2(80, 80)
 atlas = ExtResource("2_73kkf")
 region = Rect2(0, 0, 32, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y2dek"]
-atlas = ExtResource("2_73kkf")
-region = Rect2(0, 36, 32, 36)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_3sokb"]
 atlas = ExtResource("2_73kkf")
 region = Rect2(32, 0, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2dek"]
+atlas = ExtResource("2_73kkf")
+region = Rect2(0, 36, 32, 36)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5u6hq"]
 atlas = ExtResource("2_1ie0h")
@@ -72,19 +72,19 @@ animations = [{
 "texture": SubResource("AtlasTexture_tb0mf")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_3sokb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sokb")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_y2dek")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3sokb")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_y2dek")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3sokb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3sokb")
+"texture": SubResource("AtlasTexture_y2dek")
 }],
 "loop": true,
 "name": &"dash",
@@ -191,16 +191,16 @@ animations = [{
 "texture": SubResource("AtlasTexture_pdlmq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_527fh")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_pdlmq")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_527fh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pdlmq")
+"texture": SubResource("AtlasTexture_527fh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_527fh")
 }],
 "loop": true,
 "name": &"dash",
@@ -307,16 +307,16 @@ animations = [{
 "texture": SubResource("AtlasTexture_fxsl8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d5vbf")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_fxsl8")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d5vbf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fxsl8")
+"texture": SubResource("AtlasTexture_d5vbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5vbf")
 }],
 "loop": true,
 "name": &"dash",
@@ -365,7 +365,8 @@ animations = [{
 "speed": 4.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+z_index = 1
 script = ExtResource("1_08t41")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -380,7 +381,7 @@ scale = Vector2(1.00278, 0.995983)
 sprite_frames = SubResource("SpriteFrames_c5rqy")
 animation = &"dash"
 autoplay = "idle"
-frame_progress = 0.136188
+frame_progress = 0.60689
 
 [node name="FrontSprite" type="AnimatedSprite2D" parent="Sprites"]
 visible = false

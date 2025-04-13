@@ -10,3 +10,5 @@ func die():
 
 func take_damage(damage: int):
     health -= damage
+    if health <= 0:
+        die()

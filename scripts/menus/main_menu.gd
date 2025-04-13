@@ -5,7 +5,6 @@ const LEVEL = preload("res://scenes/levels/test_level.tscn")
 @onready var main: Control = $Main
 @onready var settings: Control = $Settings
 
-
 func _on_quit_pressed() -> void:
     get_tree().quit()
 
