@@ -1,8 +1,9 @@
 extends Enemy
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+const LASANGA_BALL = preload("res://scenes/entities/projectiles/lasagna.tscn")
 
-const GARF_SPEED = 120
+const GARF_SPEED = 180
 var state_duration = 0
 var state
 
@@ -24,10 +25,9 @@ func _physics_process(delta: float) -> void:
     
     if state_duration == 0:
         handle_state()
+        handle_animation()
     else:
         state_duration -= 1
-    
-    handle_animation()
     
     if is_bouncing:
         position += direction * GARF_SPEED * delta
@@ -36,12 +36,10 @@ func _physics_process(delta: float) -> void:
         shoot()
     
     if is_jumping:
-        position += direction * direction.length()
+        position += direction * GARF_SPEED * delta #* direction
         handle_jump()
 
 func handle_state():
-    if state == -1:
-        return
     var rng = RandomNumberGenerator.new()
     
     var player = get_tree().get_nodes_in_group("Player")[0]
@@ -53,37 +51,54 @@ func handle_state():
         state = rng.randi_range(0, 1)
     else:
         state = -1
+        is_bouncing = false
+        is_shooting = false
+        is_jumping = false
     
     if state == 2:
         is_bouncing = false
         is_shooting = false
         is_jumping = true
-        state_duration = 12 # multiple of 12 fps
+        state_duration = 24 # multiple of 12 fps
     elif state == 1:
         is_bouncing = false
         is_shooting = true
         is_jumping = false
-        state_duration = 0
+        state_duration = 4
     elif state == 0:
         is_bouncing = true
         is_shooting = false
         is_jumping = false
-        state_duration = 7 # multiple of 7 fps
-    else:
-        is_bouncing = false
-        is_shooting = false
-        is_jumping = false
-        
-    
+        state_duration = 14 # multiple of 7 fps
 
 func handle_animation():
     if is_bouncing:
         animated_sprite_2d.play("bounce")
-    if is_jumping:
+    elif is_jumping:
         animated_sprite_2d.play("jump")
+    else:
+        animated_sprite_2d.set_frame_and_progress(0, 0.0)
+        animated_sprite_2d.stop()
 
 func handle_jump():
-    pass
+    if state_duration == 0:
+        # landed on group and send shockwave
+        pass
 
 func shoot():
-    pass
+    for x in range(10):
+        var lasanga = LASANGA_BALL.instantiate()
+        
+        var player = get_tree().get_nodes_in_group("Player")[0]
+        var direction = player.global_position - global_position
+        if direction.length() != 0:
+            direction = direction.normalized()
+        else:
+            direction = Vector2(1,0)
+        
+        var random_angle = randf_range(-0.1, 0.1)
+        direction = direction.rotated(random_angle)
+        lasanga.linear_velocity = direction * 2000
+        lasanga.global_position = self.global_position
+        lasanga.rotation = atan2(direction.y, direction.x)
+        get_tree().current_scene.add_child(lasanga)
