@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://csgk3aeye6gie"]
+[gd_scene load_steps=8 format=3 uid="uid://csgk3aeye6gie"]
 
+[ext_resource type="Script" uid="uid://dx6no6qfngh1d" path="res://scripts/entities/towers/shooter_tower.gd" id="1_20206"]
 [ext_resource type="Texture2D" uid="uid://cahsmssik7jy7" path="res://assets/images/towers/shooter_idle_1.png" id="1_pc56a"]
 [ext_resource type="Texture2D" uid="uid://ds3bufvdmuf7a" path="res://assets/images/towers/shooter_idle_2.png" id="2_20206"]
 
@@ -29,6 +30,7 @@ animations = [{
 radius = 400.0
 
 [node name="ShooterTower" type="Node2D"]
+script = ExtResource("1_20206")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.5, 2.5)

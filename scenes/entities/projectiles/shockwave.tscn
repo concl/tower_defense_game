@@ -1,0 +1,104 @@
+[gd_scene load_steps=6 format=3 uid="uid://imdrrm64oce2"]
+
+[ext_resource type="Texture2D" path="res://assets/images/projectiles/shockwave.png" id="1_7nmau"]
+[ext_resource type="Script" uid="uid://cxe0omehgt7vm" path="res://scripts/entities/projectiles/shockwave.gd" id="1_e4krr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4krr"]
+atlas = ExtResource("1_7nmau")
+region = Rect2(0, 0, 46, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uphv"]
+atlas = ExtResource("1_7nmau")
+region = Rect2(46, 0, 46, 49)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hgxt0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4krr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uphv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Shockwave" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_e4krr")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(27, -28)
+rotation = 0.785398
+sprite_frames = SubResource("SpriteFrames_hgxt0")
+autoplay = "default"
+frame_progress = 0.599302
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -39)
+sprite_frames = SubResource("SpriteFrames_hgxt0")
+autoplay = "default"
+frame_progress = 0.0434015
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="."]
+position = Vector2(-28, -27)
+rotation = 5.49779
+sprite_frames = SubResource("SpriteFrames_hgxt0")
+autoplay = "default"
+frame_progress = 0.51677
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="."]
+position = Vector2(-40, 0)
+rotation = 4.71239
+sprite_frames = SubResource("SpriteFrames_hgxt0")
+autoplay = "default"
+frame_progress = 0.48745
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="."]
+position = Vector2(-28, 27)
+rotation = 3.92699
+sprite_frames = SubResource("SpriteFrames_hgxt0")
+autoplay = "default"
+frame_progress = 0.403653
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 39)
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_hgxt0")
+autoplay = "default"
+frame_progress = 0.930241
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="."]
+position = Vector2(28, 27)
+rotation = 2.35619
+sprite_frames = SubResource("SpriteFrames_hgxt0")
+autoplay = "default"
+frame_progress = 0.747041
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+position = Vector2(39, -1)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_hgxt0")
+autoplay = "default"
+frame_progress = 0.372086
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, -48, 1, -55, -29, -45, -45, -27, -54, -2, -45, 31, -26, 47, 0, 55, 1, 47, -24, 40, -39, 27, -48, -2, -40, -25, -25, -40)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
+rotation = 3.14159
+polygon = PackedVector2Array(0, -48, 1, -55, -29, -45, -45, -27, -54, -2, -45, 31, -26, 47, 0, 55, 1, 47, -24, 40, -39, 27, -48, -2, -40, -25, -25, -40)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

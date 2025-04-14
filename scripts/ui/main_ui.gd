@@ -18,7 +18,7 @@ const SHOTGUN_TOWER_CURSOR = preload("res://assets/images/cursors/shotgun_tower_
 @onready var stamina_bar: TextureProgressBar = $InGameUI/VBoxContainer/StaminaBar
 @onready var weapon_icon: TextureRect = $InGameUI/WeaponIcon
 @onready var ammo_count: Label = $InGameUI/AmmoCount
-@onready var coin_label: Label = $InGameUI/RightSide/RightPanel/PanelContainer/HBoxContainer/CoinLabel
+@onready var coin_label: Label = $InGameUI/RightSide/RightPanel/HBoxContainer/CoinLabel
 
 @onready var start_wave: Button = $InGameUI/RightSide/StartWave
 @onready var tower_info: PanelContainer = $InGameUI/RightSide/RightPanel/TowerInfo
