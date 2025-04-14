@@ -23,7 +23,7 @@ func _on_area_2d_mouse_exited() -> void:
 
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-    if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
+    if event is InputEventMouseButton and event.button_index == 1 and !event.pressed:
         var player = get_tree().get_first_node_in_group("Player")
         var tower = player.holding_tower
         if tower == -1:
