@@ -2,11 +2,11 @@ extends Entity
 
 class_name Player
 
+const CURSOR_NORMAL = preload("res://assets/images/cursors/cursor_normal.png")
 @onready var sprites: Node2D = $Sprites
 @onready var player_sprite: AnimatedSprite2D = $Sprites/PlayerSprite
 @onready var front_sprite: AnimatedSprite2D = $Sprites/FrontSprite
 @onready var back_sprite: AnimatedSprite2D = $Sprites/BackSprite
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 const CAR_LASER = preload("res://scenes/entities/projectiles/car_laser.tscn")
 
@@ -36,6 +36,9 @@ var max_stamina = 90
 var weapon_cooldowns = Vector3i(60, 12, 120)
 
 # State
+var is_tower_mode = false
+var holding_tower = -1
+
 var money = 100
 var stamina = 90
 
@@ -295,11 +298,30 @@ func handle_input(delta: float):
         current_weapon -= 1
         if current_weapon < 0:
             current_weapon = 1
-        
     
-    if Input.is_action_pressed("attack") and cooldown_progress[current_weapon] == 0  and !is_mouse_over_ui():
+    if Input.is_action_pressed("attack") and cooldown_progress[current_weapon] == 0  and !is_mouse_over_ui() and !is_tower_mode:
         handle_attack()
     
+    if Input.is_action_just_pressed("tower_menu"):
+        is_tower_mode = !is_tower_mode
+        if is_tower_mode:
+            tower_mode()
+        else:
+            normal_mode()
+
+func tower_mode():
+    is_tower_mode = true
+    for holder in get_tree().get_nodes_in_group("towers"):
+        holder.show()
+    Globals.ui.tower_mode()
+
+func normal_mode():
+    holding_tower = -1
+    is_tower_mode = false
+    Input.set_custom_mouse_cursor(CURSOR_NORMAL)
+    for holder in get_tree().get_nodes_in_group("towers"):
+        holder.hide()
+    Globals.ui.normal_mode()
 
 func _physics_process(delta: float) -> void:
     handle_input(delta)
@@ -312,7 +334,6 @@ func _physics_process(delta: float) -> void:
         handle_jump(delta)
     else:
         handle_general(delta)
-    
     
     cooldown_progress -= Vector3i(1,1,1)
     cooldown_progress = cooldown_progress.max(Vector3i())

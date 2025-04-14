@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bb0xty80owtkt"]
+[gd_scene load_steps=17 format=3 uid="uid://bb0xty80owtkt"]
 
 [ext_resource type="Script" uid="uid://b1cwmv3craqjq" path="res://scripts/ui/main_ui.gd" id="1_travt"]
 [ext_resource type="Theme" uid="uid://8v8xgpdy1iuh" path="res://assets/themes/menu_theme.tres" id="2_hcnxy"]
@@ -11,9 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://c147tqdogrimj" path="res://assets/images/ui/coin_icon.png" id="9_yc0ux"]
 [ext_resource type="Texture2D" uid="uid://deugju20is0m1" path="res://assets/images/ui/dispenser_icon.png" id="10_8s2gp"]
 [ext_resource type="Texture2D" uid="uid://cthyoepmat1f8" path="res://assets/images/ui/shooter_icon.png" id="11_ampf0"]
+[ext_resource type="Texture2D" uid="uid://e6f6ykd5gyek" path="res://assets/images/ui/dispenser_icon_pressed.png" id="11_chv3i"]
 [ext_resource type="Texture2D" uid="uid://bltfjyptscjop" path="res://assets/images/ui/shooter_icon_pressed.png" id="12_chv3i"]
 [ext_resource type="Texture2D" uid="uid://b5ik5bx8ism4m" path="res://assets/images/ui/shottower_icon.png" id="13_h2n7m"]
 [ext_resource type="Texture2D" uid="uid://oq2ni0l4hpun" path="res://assets/images/ui/shottower_icon_pressed.png" id="14_xfu30"]
+[ext_resource type="Texture2D" uid="uid://bk5rfrb8fsj56" path="res://assets/images/ui/trash_icon.png" id="16_chv3i"]
 
 [node name="MainUI" type="CanvasLayer"]
 script = ExtResource("1_travt")
@@ -26,6 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("2_hcnxy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InGameUI"]
@@ -42,6 +45,7 @@ theme_override_constants/margin_left = 2
 
 [node name="HealthBar" type="TextureProgressBar" parent="InGameUI/VBoxContainer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 value = 100.0
 texture_over = ExtResource("3_l8t6x")
 texture_progress = ExtResource("4_travt")
@@ -60,6 +64,7 @@ text = "100"
 
 [node name="StaminaBar" type="TextureProgressBar" parent="InGameUI/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 max_value = 90.0
 value = 90.0
 texture_over = ExtResource("5_46cp5")
@@ -78,6 +83,7 @@ offset_right = -231.0
 offset_bottom = 41.0
 grow_horizontal = 2
 scale = Vector2(8, 8)
+mouse_filter = 2
 max_value = 1000.0
 value = 1000.0
 texture_over = ExtResource("7_t0li6")
@@ -152,6 +158,7 @@ theme_override_constants/v_separation = 40
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = ExtResource("10_8s2gp")
+texture_pressed = ExtResource("11_chv3i")
 stretch_mode = 5
 
 [node name="Shooter" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
@@ -168,8 +175,18 @@ texture_normal = ExtResource("13_h2n7m")
 texture_pressed = ExtResource("14_xfu30")
 stretch_mode = 5
 
+[node name="Trash" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("16_chv3i")
+stretch_mode = 5
+
 [node name="StartWave" type="Button" parent="InGameUI/RightSide"]
 layout_mode = 2
 text = "Start Wave"
 
+[connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/Dispenser" to="." method="_on_dispenser_pressed"]
+[connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/Shooter" to="." method="_on_shooter_pressed"]
+[connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/Shotgun" to="." method="_on_shotgun_pressed"]
+[connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/Trash" to="." method="_on_trash_pressed"]
 [connection signal="pressed" from="InGameUI/RightSide/StartWave" to="." method="_on_start_wave_pressed"]

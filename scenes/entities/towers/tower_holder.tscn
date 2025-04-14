@@ -1,12 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cctgni2rprygv"]
+[gd_scene load_steps=6 format=3 uid="uid://cctgni2rprygv"]
 
 [ext_resource type="Texture2D" uid="uid://d2ks6brjp1gwo" path="res://assets/images/towers/tower_holder.png" id="1_m1igp"]
+[ext_resource type="Script" uid="uid://c3r1n824seaix" path="res://scripts/entities/towers/tower_holder.gd" id="1_mxs1n"]
+[ext_resource type="Shader" uid="uid://cbvha11gl030b" path="res://assets/shaders/flash_red.gdshader" id="2_i75tx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1igp"]
 size = Vector2(32, 32)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65tnn"]
+resource_local_to_scene = true
+shader = ExtResource("2_i75tx")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
 [node name="TowerHolder" type="Node2D" groups=["towers"]]
 scale = Vector2(2.5, 2.5)
+script = ExtResource("1_mxs1n")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -14,4 +23,9 @@ scale = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_m1igp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_65tnn")
 texture = ExtResource("1_m1igp")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

@@ -1,9 +1,9 @@
 extends Node2D
 
 @onready var player: CharacterBody2D = $Player
-@onready var health_bar: TextureProgressBar = $InGameUI/HealthBar
 @onready var main_path: Path2D = $Paths/MainPath
 @onready var flank_path: Path2D = $Paths/FlankPath
+@onready var tower_holders: Node2D = $TowerHolders
 
 signal wave_started
 signal wave_ended
@@ -39,7 +39,9 @@ var waves: Array = [
         {"enemy": "yarn", "amount": 12, "spacing": 20, "spawnpoint": 1}
     ],
     [
-        {"enemy": "mouse_bomber", "amount": 10, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "mouse_bomber", "amount": 5, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 10, "spacing": 20, "spawnpoint": 1},
+        {"enemy": "mouse_bomber", "amount": 5, "spacing": 40, "spawnpoint": 0},
     ]
 ]
 
@@ -92,15 +94,13 @@ func handle_spawns():
         else:
             queued_spawn = ""
             subwave += 1
-            
-    
 
 func start_wave():
     wave_in_progress = true
     current_wave += 1
     if current_wave < waves.size():
         wave_started.emit()
-    
+
     
 func _ready():
     Globals.add_ui(player, self)

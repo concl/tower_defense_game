@@ -22,7 +22,7 @@ var player: Player
 
 func _physics_process(delta: float) -> void:
     if player == null:
-        player = get_tree().get_nodes_in_group("Player")[0]
+        player = get_tree().get_first_node_in_group("Player")
     
     var direction = player.global_position - global_position
     var dist = direction.length()

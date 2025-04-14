@@ -7,6 +7,11 @@ const MAIN_UI_SCENE = preload("res://scenes/ui/main_ui.tscn")
 var player: Player
 var level
 
+const CURSOR_NORMAL = preload("res://assets/images/cursors/cursor_normal.png")
+const DISPENSER_CURSOR = preload("res://assets/images/cursors/dispenser_cursor.png")
+const SHOOTER_CURSOR = preload("res://assets/images/cursors/shooter_cursor.png")
+const SHOTGUN_TOWER_CURSOR = preload("res://assets/images/cursors/shotgun_tower_cursor.png")
+
 @onready var in_game_ui: Control = $InGameUI
 @onready var health_bar: TextureProgressBar = $InGameUI/VBoxContainer/MarginContainer/HealthBar
 @onready var label: Label = $InGameUI/VBoxContainer/MarginContainer/HealthBar/Label
@@ -66,3 +71,23 @@ func tower_mode():
 
 func normal_mode():
     tower_info.hide()
+
+
+func _on_dispenser_pressed() -> void:
+    Input.set_custom_mouse_cursor(DISPENSER_CURSOR)
+    player.holding_tower = 0
+
+
+func _on_shooter_pressed() -> void:
+    Input.set_custom_mouse_cursor(SHOOTER_CURSOR)
+    player.holding_tower = 1
+
+
+func _on_shotgun_pressed() -> void:
+    Input.set_custom_mouse_cursor(SHOTGUN_TOWER_CURSOR)
+    player.holding_tower = 2
+
+
+func _on_trash_pressed() -> void:
+    Input.set_custom_mouse_cursor(CURSOR_NORMAL)
+    player.holding_tower = -1

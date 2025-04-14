@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="tower_defense_game"
-run/main_scene="uid://dllg7m8c3b27q"
+run/main_scene="uid://cu18smfs8jlg4"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -25,7 +25,7 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/initial_position=Vector2i(500, 500)
 window/stretch/mode="viewport"
-mouse_cursor/custom_image="uid://cbxipsfxv01hq"
+mouse_cursor/custom_image="uid://bkw137qpi4lxk"
 
 [global_group]
 
@@ -89,7 +89,7 @@ prev_weapon={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(263, 13),"global_position":Vector2(272, 61),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
-prev_tower={
+tower_menu={
 "deadzone": 0.2,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(63, 11),"global_position":Vector2(72, 59),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
