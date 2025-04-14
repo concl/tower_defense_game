@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cu18smfs8jlg4"]
+[gd_scene load_steps=7 format=3 uid="uid://cu18smfs8jlg4"]
 
-[ext_resource type="VideoStream" uid="uid://lalmn4ewilti" path="res://assets/opening_cutscene.ogv" id="1_1iurh"]
+[ext_resource type="VideoStream" uid="uid://bc00jf25poh6q" path="res://assets/opening_cutscene.ogv" id="1_1iurh"]
 [ext_resource type="Script" uid="uid://bcqsft5jbcq6e" path="res://scripts/cutscenes/intro_cutscene.gd" id="1_8464f"]
+[ext_resource type="Theme" uid="uid://8v8xgpdy1iuh" path="res://assets/themes/menu_theme.tres" id="1_iwduf"]
+[ext_resource type="Texture2D" uid="uid://dy0has80g4r2k" path="res://assets/images/ui/skip_icon.png" id="4_jfsk7"]
+
+[sub_resource type="Animation" id="Animation_iwduf"]
+resource_name = "fade_in"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jfsk7"]
+_data = {
+&"fade_in": SubResource("Animation_iwduf")
+}
 
 [node name="IntroCutscene" type="Control"]
 layout_mode = 3
@@ -10,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_iwduf")
 script = ExtResource("1_8464f")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
@@ -23,11 +34,25 @@ stream = ExtResource("1_1iurh")
 autoplay = true
 expand = true
 
-[node name="SkipButton" type="Button" parent="."]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Skip"
+[node name="SkipButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -120.0
+offset_right = 120.0
+offset_bottom = -40.0
+grow_vertical = 0
+texture_normal = ExtResource("4_jfsk7")
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jfsk7")
+}
+autoplay = "fade_in"
 
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
 [connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]
