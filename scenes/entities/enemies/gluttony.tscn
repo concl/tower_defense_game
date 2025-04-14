@@ -1,6 +1,28 @@
-[gd_scene load_steps=12 format=3 uid="uid://dikdyq0kefimx"]
+[gd_scene load_steps=20 format=3 uid="uid://dikdyq0kefimx"]
 
+[ext_resource type="Script" uid="uid://cmnb8xgmfxvsj" path="res://scripts/entities/enemies/gluttony.gd" id="1_6ujhh"]
 [ext_resource type="Texture2D" uid="uid://bgdwnol5e2dgv" path="res://assets/images/garfield_frames/jump.png" id="1_dsogk"]
+[ext_resource type="Texture2D" uid="uid://dru2xmqr5074b" path="res://assets/images/garfield_frames/bounce.png" id="2_3fgre"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4fsh"]
+atlas = ExtResource("2_3fgre")
+region = Rect2(0, 0, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xqhc"]
+atlas = ExtResource("2_3fgre")
+region = Rect2(40, 0, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xeogo"]
+atlas = ExtResource("2_3fgre")
+region = Rect2(80, 0, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8dq7"]
+atlas = ExtResource("2_3fgre")
+region = Rect2(0, 120, 40, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p51fd"]
+atlas = ExtResource("2_3fgre")
+region = Rect2(40, 120, 40, 120)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dsogk"]
 atlas = ExtResource("1_dsogk")
@@ -40,10 +62,25 @@ region = Rect2(80, 240, 40, 120)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m4fsh"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4fsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xqhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xeogo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8dq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p51fd")
+}],
 "loop": true,
-"name": &"idle",
-"speed": 5.0
+"name": &"bounce",
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -78,11 +115,20 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dsogk"]
+radius = 96.0052
+
 [node name="Gluttony" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_6ujhh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(8, 8)
+position = Vector2(0, -481)
+scale = Vector2(8, 8.01667)
 sprite_frames = SubResource("SpriteFrames_m4fsh")
-animation = &"idle"
+animation = &"bounce"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -120)
+shape = SubResource("CircleShape2D_dsogk")
