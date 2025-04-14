@@ -5,12 +5,12 @@ const LASANGA_BALL = preload("res://scenes/entities/projectiles/lasagna.tscn")
 const SHOCKWAVE = preload("res://scenes/entities/projectiles/shockwave.tscn")
 
 const GARF_SPEED = 180
-var state_duration = 0
-var state
+var state_duration = 15
+var state = 0
 
 # State
 # walk towards player
-var is_bouncing = false
+var is_bouncing = true
 # leaps to player, lurp position to a predicited place baased on player's current velocity, falls, and creates a shockwave
 var is_jumping = false
 # launches lasagna in a circle
@@ -60,7 +60,7 @@ func handle_state():
         is_bouncing = false
         is_shooting = false
         is_jumping = true
-        state_duration = 24 # multiple of 12 fps
+        state_duration = 26 # 13/12 frames
     elif state == 1:
         is_bouncing = false
         is_shooting = true
@@ -70,7 +70,7 @@ func handle_state():
         is_bouncing = true
         is_shooting = false
         is_jumping = false
-        state_duration = 14 # multiple of 7 fps
+        state_duration = 15 # 5/7 frames
 
 func handle_animation():
     if is_bouncing:
@@ -90,11 +90,11 @@ func handle_jump():
         
 
 func shoot():
-    for x in range(10):
+    for x in range(5):
         var lasanga = LASANGA_BALL.instantiate()
         
         var player = get_tree().get_nodes_in_group("Player")[0]
-        var direction = player.global_position - global_position
+        var direction = player.global_position - self.global_position
         if direction.length() != 0:
             direction = direction.normalized()
         else:

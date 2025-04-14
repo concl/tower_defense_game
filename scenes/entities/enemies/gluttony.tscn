@@ -127,7 +127,7 @@ script = ExtResource("1_6ujhh")
 position = Vector2(0, -481)
 scale = Vector2(8, 8.01667)
 sprite_frames = SubResource("SpriteFrames_m4fsh")
-animation = &"bounce"
+animation = &"jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4, -120)
