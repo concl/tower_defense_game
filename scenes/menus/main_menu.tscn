@@ -98,7 +98,6 @@ layout_mode = 2
 text = "Back"
 
 [node name="HowToPlay" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -106,30 +105,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlay"]
+[node name="PanelContainer" type="PanelContainer" parent="HowToPlay"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -28.0
-offset_right = 64.0
-offset_bottom = 28.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="HowToPlay/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlay/PanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="HowToPlay/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Welcome to HellCat!
 
 To play the game, click the New Game Button in the Main Menu.
 "
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HowToPlay/VBoxContainer"]
+[node name="Label2" type="Label" parent="HowToPlay/PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Controls:
 
 
@@ -142,7 +142,7 @@ Space - Jump
 Click - Shoot toward the Mouse
 "
 
-[node name="Back2" type="Button" parent="HowToPlay/VBoxContainer"]
+[node name="Back2" type="Button" parent="HowToPlay/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Back"
@@ -157,4 +157,4 @@ autoplay = true
 [connection signal="pressed" from="Main/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="toggled" from="Settings/VBoxContainer/Fullscreen/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="Settings/VBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="HowToPlay/VBoxContainer/Back2" to="." method="_on_back_2_pressed"]
+[connection signal="pressed" from="HowToPlay/PanelContainer/VBoxContainer/Back2" to="." method="_on_back_2_pressed"]
