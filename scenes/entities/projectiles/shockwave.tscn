@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://imdrrm64oce2"]
 
-[ext_resource type="Texture2D" path="res://assets/images/projectiles/shockwave.png" id="1_7nmau"]
+[ext_resource type="Texture2D" uid="uid://solasb5i7ul7" path="res://assets/images/projectiles/shockwave.png" id="1_7nmau"]
 [ext_resource type="Script" uid="uid://cxe0omehgt7vm" path="res://scripts/entities/projectiles/shockwave.gd" id="1_e4krr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e4krr"]
