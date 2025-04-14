@@ -1,8 +1,9 @@
-[gd_scene load_steps=54 format=3 uid="uid://dgabwwlqksg48"]
+[gd_scene load_steps=58 format=3 uid="uid://dgabwwlqksg48"]
 
 [ext_resource type="Script" uid="uid://di7xecebd0bbq" path="res://scripts/entities/player.gd" id="1_08t41"]
 [ext_resource type="Texture2D" uid="uid://kokmwwyn3eec" path="res://assets/images/player_frames/idle.png" id="2_1ie0h"]
 [ext_resource type="Texture2D" uid="uid://cn5jdxkv4m8ru" path="res://assets/images/player_frames/dash.png" id="2_73kkf"]
+[ext_resource type="Shader" uid="uid://cbvha11gl030b" path="res://assets/shaders/flash_red.gdshader" id="2_saib0"]
 [ext_resource type="Texture2D" uid="uid://ch00twovhbckb" path="res://assets/images/player_frames/jump.png" id="3_5u6hq"]
 [ext_resource type="Texture2D" uid="uid://cxjus53chaa7x" path="res://assets/images/player_frames/run.png" id="3_42nxq"]
 [ext_resource type="Texture2D" uid="uid://b4a1yuqmdy560" path="res://assets/images/player_frames/idle_front.png" id="5_ss7kx"]
@@ -16,6 +17,11 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qees"]
 size = Vector2(80, 80)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1yk18"]
+shader = ExtResource("2_saib0")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tb0mf"]
 atlas = ExtResource("2_73kkf")
@@ -133,6 +139,11 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_saib0"]
+shader = ExtResource("2_saib0")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_txtga"]
 atlas = ExtResource("6_5ki56")
 region = Rect2(0, 0, 32, 36)
@@ -248,6 +259,11 @@ animations = [{
 "name": &"run",
 "speed": 4.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spk56"]
+shader = ExtResource("2_saib0")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ow4gm"]
 atlas = ExtResource("10_saib0")
@@ -378,6 +394,7 @@ position = Vector2(5, -25)
 scale = Vector2(4, 4)
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Sprites"]
+material = SubResource("ShaderMaterial_1yk18")
 scale = Vector2(1.00278, 0.995983)
 sprite_frames = SubResource("SpriteFrames_c5rqy")
 animation = &"dash"
@@ -386,12 +403,14 @@ frame_progress = 0.60689
 
 [node name="FrontSprite" type="AnimatedSprite2D" parent="Sprites"]
 visible = false
+material = SubResource("ShaderMaterial_saib0")
 sprite_frames = SubResource("SpriteFrames_d745t")
 animation = &"dash"
 autoplay = "idle"
 
 [node name="BackSprite" type="AnimatedSprite2D" parent="Sprites"]
 visible = false
+material = SubResource("ShaderMaterial_spk56")
 sprite_frames = SubResource("SpriteFrames_qc1tv")
 animation = &"dash"
 autoplay = "idle"

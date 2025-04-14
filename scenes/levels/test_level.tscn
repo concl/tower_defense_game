@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=4 uid="uid://svx4jr0xhp06"]
+[gd_scene load_steps=16 format=4 uid="uid://svx4jr0xhp06"]
 
 [ext_resource type="Script" uid="uid://bdcdy07otahtp" path="res://scripts/levels/test_level.gd" id="1_v45ci"]
 [ext_resource type="PackedScene" uid="uid://dgabwwlqksg48" path="res://scenes/entities/player.tscn" id="1_yautc"]
 [ext_resource type="Texture2D" uid="uid://ywbd88la04v6" path="res://assets/images/tileset.png" id="2_fr1um"]
+[ext_resource type="PackedScene" uid="uid://cctgni2rprygv" path="res://scenes/entities/towers/tower_holder.tscn" id="5_6xh4u"]
 [ext_resource type="PackedScene" uid="uid://c45rit8pka2c5" path="res://scenes/entities/piggy_bank.tscn" id="5_48ne7"]
+[ext_resource type="PackedScene" uid="uid://t6uerggu8i2c" path="res://scenes/entities/towers/dispenser.tscn" id="6_6xh4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v45ci"]
 texture = ExtResource("2_fr1um")
@@ -219,6 +221,220 @@ curve = SubResource("Curve2D_fr1um")
 [node name="FlankPath" type="Path2D" parent="Paths"]
 curve = SubResource("Curve2D_48ne7")
 
+[node name="TowerHolders" type="Node2D" parent="."]
+visible = false
+position = Vector2(984, 576)
+
+[node name="TowerHolder" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-504, 64.0001)
+
+[node name="TowerHolder2" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-704, 64)
+
+[node name="TowerHolder3" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-704, 184)
+
+[node name="TowerHolder4" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-624, 264)
+
+[node name="TowerHolder5" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-504, 264)
+
+[node name="TowerHolder6" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-384, 264)
+
+[node name="TowerHolder7" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-304, 184)
+
+[node name="TowerHolder8" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-304, 64)
+
+[node name="TowerHolder9" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-704, -136)
+
+[node name="TowerHolder10" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-824, -136)
+
+[node name="TowerHolder11" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-824, -336)
+
+[node name="TowerHolder12" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-704, -336)
+
+[node name="TowerHolder13" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-904, -56)
+
+[node name="TowerHolder14" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-904, 64)
+
+[node name="TowerHolder15" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-904, 184)
+
+[node name="TowerHolder16" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-904, 304)
+
+[node name="TowerHolder17" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-904, 464)
+
+[node name="TowerHolder18" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-744, 464)
+
+[node name="TowerHolder19" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-624, 464)
+
+[node name="TowerHolder20" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-504, 464)
+
+[node name="TowerHolder21" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-384, 464)
+
+[node name="TowerHolder22" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-264, 464)
+
+[node name="TowerHolder23" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-104, 464)
+
+[node name="TowerHolder24" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-104, 264)
+
+[node name="TowerHolder25" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-104, 144)
+
+[node name="TowerHolder26" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-304, -56)
+
+[node name="TowerHolder27" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-384, -136)
+
+[node name="TowerHolder28" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-104, -136)
+
+[node name="TowerHolder29" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-504, -136)
+
+[node name="TowerHolder30" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-504, -336)
+
+[node name="TowerHolder31" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-304, -336)
+
+[node name="TowerHolder32" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-184, -336)
+
+[node name="TowerHolder33" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-504, -456)
+
+[node name="TowerHolder34" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-424, -536)
+
+[node name="TowerHolder35" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-104, -256)
+
+[node name="TowerHolder36" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-304, -536)
+
+[node name="TowerHolder37" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-184, -536)
+
+[node name="TowerHolder38" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(-64, -536)
+
+[node name="TowerHolder39" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(96, -536)
+
+[node name="TowerHolder40" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(96, -376)
+
+[node name="TowerHolder41" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(96, -256)
+
+[node name="TowerHolder42" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(96, -136)
+
+[node name="TowerHolder43" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(96, 144)
+
+[node name="TowerHolder44" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(96, 264)
+
+[node name="TowerHolder45" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(96, 464)
+
+[node name="TowerHolder46" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(216, 464)
+
+[node name="TowerHolder47" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(216, 264)
+
+[node name="TowerHolder48" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(336, 264)
+
+[node name="TowerHolder49" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(336, 464)
+
+[node name="TowerHolder50" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(456, 264)
+
+[node name="TowerHolder51" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(456, 464)
+
+[node name="TowerHolder52" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(576, 264)
+
+[node name="TowerHolder53" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(576, 464)
+
+[node name="TowerHolder54" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(696, 464)
+
+[node name="TowerHolder55" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(816, 464)
+
+[node name="TowerHolder56" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(896, 384)
+
+[node name="TowerHolder57" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(696, 264)
+
+[node name="TowerHolder58" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(896, 264)
+
+[node name="TowerHolder59" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(696, 144)
+
+[node name="TowerHolder60" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(896, 144)
+
+[node name="TowerHolder61" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(696, 24)
+
+[node name="TowerHolder62" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(896, 24)
+
+[node name="TowerHolder63" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(696, -96)
+
+[node name="TowerHolder64" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(896, -96)
+
+[node name="TowerHolder65" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(696, -216)
+
+[node name="TowerHolder66" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(896, -216)
+
+[node name="TowerHolder67" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(896, -336)
+
+[node name="TowerHolder68" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(696, -336)
+
+[node name="TowerHolder69" parent="TowerHolders" instance=ExtResource("5_6xh4u")]
+position = Vector2(896, -456)
+
+[node name="Player" parent="." instance=ExtResource("1_yautc")]
+position = Vector2(1120, 576)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(415, 188)
 zoom = Vector2(1.5, 1.5)
@@ -229,8 +445,8 @@ limit_bottom = 1080
 script = SubResource("GDScript_yautc")
 target_path = NodePath("../Player")
 
-[node name="Player" parent="." instance=ExtResource("1_yautc")]
-position = Vector2(1120, 576)
-
 [node name="PiggyBank" parent="." instance=ExtResource("5_48ne7")]
 position = Vector2(984, 576)
+
+[node name="Dispenser" parent="." instance=ExtResource("6_6xh4u")]
+position = Vector2(840, 600)

@@ -1,10 +1,70 @@
-[gd_scene load_steps=2 format=3 uid="uid://cucy3b7eagd5a"]
+[gd_scene load_steps=8 format=3 uid="uid://cucy3b7eagd5a"]
 
-[ext_resource type="Texture2D" uid="uid://b8arslvakme8a" path="res://assets/images/yarn.png" id="1_662ui"]
+[ext_resource type="Texture2D" uid="uid://cb5ig77iwp7ar" path="res://assets/images/enemy/yarn.png" id="1_662ui"]
+[ext_resource type="Script" uid="uid://w70qthg0fuck" path="res://scripts/entities/enemies/yarn.gd" id="1_p4tli"]
+[ext_resource type="Texture2D" uid="uid://jfwn0au2a6xk" path="res://assets/images/enemy/yarn_tail.png" id="2_4ynaf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4tli"]
+radius = 7.9
+
+[sub_resource type="Animation" id="Animation_rw2mj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Ball:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4ynaf"]
+resource_name = "move"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Ball:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6.28319, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0wni"]
+_data = {
+&"RESET": SubResource("Animation_rw2mj"),
+&"move": SubResource("Animation_4ynaf")
+}
 
 [node name="Yarn" type="CharacterBody2D"]
+scale = Vector2(4, 4)
+collision_layer = 2
+script = ExtResource("1_p4tli")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="YarnTail" type="Sprite2D" parent="Sprites"]
+position = Vector2(2.5, 4.5)
+texture = ExtResource("2_4ynaf")
+offset = Vector2(8, 0)
+
+[node name="Ball" type="Sprite2D" parent="Sprites"]
 texture = ExtResource("1_662ui")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_p4tli")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_f0wni")
+}
+autoplay = "move"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bb0xty80owtkt"]
+[gd_scene load_steps=15 format=3 uid="uid://bb0xty80owtkt"]
 
 [ext_resource type="Script" uid="uid://b1cwmv3craqjq" path="res://scripts/ui/main_ui.gd" id="1_travt"]
 [ext_resource type="Theme" uid="uid://8v8xgpdy1iuh" path="res://assets/themes/menu_theme.tres" id="2_hcnxy"]
@@ -8,6 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://de8n15i7gs8gl" path="res://assets/images/ui/stamina_progress.png" id="6_b1beo"]
 [ext_resource type="Texture2D" uid="uid://dp0vxmluo3pm3" path="res://assets/images/ui/boss_bar.png" id="7_t0li6"]
 [ext_resource type="Texture2D" uid="uid://bmyiraxju1mgt" path="res://assets/images/ui/shotgun_icon.png" id="8_oxwcw"]
+[ext_resource type="Texture2D" uid="uid://c147tqdogrimj" path="res://assets/images/ui/coin_icon.png" id="9_yc0ux"]
+[ext_resource type="Texture2D" uid="uid://deugju20is0m1" path="res://assets/images/ui/dispenser_icon.png" id="10_8s2gp"]
+[ext_resource type="Texture2D" uid="uid://cthyoepmat1f8" path="res://assets/images/ui/shooter_icon.png" id="11_ampf0"]
+[ext_resource type="Texture2D" uid="uid://bltfjyptscjop" path="res://assets/images/ui/shooter_icon_pressed.png" id="12_chv3i"]
+[ext_resource type="Texture2D" uid="uid://b5ik5bx8ism4m" path="res://assets/images/ui/shottower_icon.png" id="13_h2n7m"]
+[ext_resource type="Texture2D" uid="uid://oq2ni0l4hpun" path="res://assets/images/ui/shottower_icon_pressed.png" id="14_xfu30"]
 
 [node name="MainUI" type="CanvasLayer"]
 script = ExtResource("1_travt")
@@ -98,24 +104,72 @@ offset_top = 968.0
 offset_right = 246.0
 offset_bottom = 1000.0
 
-[node name="TowerInfo" type="PanelContainer" parent="InGameUI"]
-visible = false
-layout_mode = 0
-offset_left = 1639.0
-offset_right = 1920.0
-offset_bottom = 1024.0
-
-[node name="StartWave" type="Button" parent="InGameUI"]
+[node name="RightSide" type="VBoxContainer" parent="InGameUI"]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 11
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -16.0
-offset_top = -24.0
+offset_left = -284.0
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 2
+
+[node name="RightPanel" type="VBoxContainer" parent="InGameUI/RightSide"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="InGameUI/RightSide/RightPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InGameUI/RightSide/RightPanel/PanelContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+
+[node name="CoinIcon" type="TextureRect" parent="InGameUI/RightSide/RightPanel/PanelContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_yc0ux")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CoinLabel" type="Label" parent="InGameUI/RightSide/RightPanel/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "100"
+
+[node name="TowerInfo" type="PanelContainer" parent="InGameUI/RightSide/RightPanel"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="InGameUI/RightSide/RightPanel/TowerInfo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/v_separation = 40
+
+[node name="Dispenser" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("10_8s2gp")
+stretch_mode = 5
+
+[node name="Shooter" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("11_ampf0")
+texture_pressed = ExtResource("12_chv3i")
+stretch_mode = 5
+
+[node name="Shotgun" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("13_h2n7m")
+texture_pressed = ExtResource("14_xfu30")
+stretch_mode = 5
+
+[node name="StartWave" type="Button" parent="InGameUI/RightSide"]
+layout_mode = 2
 text = "Start Wave"
 
-[connection signal="pressed" from="InGameUI/StartWave" to="." method="_on_start_wave_pressed"]
+[connection signal="pressed" from="InGameUI/RightSide/StartWave" to="." method="_on_start_wave_pressed"]

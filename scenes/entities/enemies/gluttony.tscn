@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dikdyq0kefimx"]
 
-[ext_resource type="Texture2D" uid="uid://bgdwnol5e2dgv" path="res://assets/images/james_jump.png" id="1_dsogk"]
+[ext_resource type="Texture2D" uid="uid://bgdwnol5e2dgv" path="res://assets/images/garfield_frames/jump.png" id="1_dsogk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dsogk"]
 atlas = ExtResource("1_dsogk")
@@ -83,8 +83,6 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_m4fsh")
-animation = &"jump"
-frame = 7
-frame_progress = 0.0549397
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

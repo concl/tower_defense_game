@@ -1,0 +1,98 @@
+[gd_scene load_steps=14 format=3 uid="uid://lnost64mvv2w"]
+
+[ext_resource type="Script" uid="uid://cj8cswusx1m0y" path="res://scripts/entities/enemies/mouse_bomber.gd" id="1_d8x6v"]
+[ext_resource type="Texture2D" uid="uid://yb04sgtw5i7f" path="res://assets/images/enemy/mouse_bomber.png" id="2_abpra"]
+[ext_resource type="Texture2D" uid="uid://dauah4k4x3pxy" path="res://assets/images/enemy/explosion.png" id="2_wdu7m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wdu7m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dj8b"]
+atlas = ExtResource("2_wdu7m")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4p6o"]
+atlas = ExtResource("2_wdu7m")
+region = Rect2(36, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvvtx"]
+atlas = ExtResource("2_wdu7m")
+region = Rect2(0, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca70a"]
+atlas = ExtResource("2_wdu7m")
+region = Rect2(36, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdu7m"]
+atlas = ExtResource("2_abpra")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fw3o"]
+atlas = ExtResource("2_abpra")
+region = Rect2(36, 0, 36, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d8x6v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dj8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4p6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvvtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca70a")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdu7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fw3o")
+}],
+"loop": true,
+"name": &"run",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1fw3o"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8dj8b"]
+radius = 30.0
+
+[node name="MouseBomber" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_d8x6v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wdu7m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d8x6v")
+animation = &"run"
+autoplay = "run"
+
+[node name="ExplosionHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionHitbox"]
+shape = SubResource("CircleShape2D_1fw3o")
+
+[node name="TriggerHitbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerHitbox"]
+shape = SubResource("CircleShape2D_8dj8b")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="TriggerHitbox" to="." method="_on_trigger_hitbox_body_entered"]

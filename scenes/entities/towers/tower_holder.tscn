@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cctgni2rprygv"]
+
+[ext_resource type="Texture2D" uid="uid://d2ks6brjp1gwo" path="res://assets/images/towers/tower_holder.png" id="1_m1igp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1igp"]
+size = Vector2(32, 32)
+
+[node name="TowerHolder" type="Node2D" groups=["towers"]]
+scale = Vector2(2.5, 2.5)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_m1igp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m1igp")

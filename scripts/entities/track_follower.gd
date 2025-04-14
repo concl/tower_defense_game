@@ -8,9 +8,10 @@ var payload
 
 func get_path_direction(lookahead_distance: float = 1.0) -> Vector2:
     var curve = self.get_parent().curve
-    var offset = self.offset
-    var pos_now = curve.sample_offset(offset)
-    var pos_next = curve.sample_offset(offset + lookahead_distance)
+    var offset = self.progress
+    
+    var pos_now = curve.sample_baked(offset)
+    var pos_next = curve.sample_baked(offset + lookahead_distance)
     return (pos_next - pos_now).normalized()
 
 func _physics_process(delta: float) -> void:

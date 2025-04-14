@@ -13,8 +13,10 @@ var level
 @onready var stamina_bar: TextureProgressBar = $InGameUI/VBoxContainer/StaminaBar
 @onready var weapon_icon: TextureRect = $InGameUI/WeaponIcon
 @onready var ammo_count: Label = $InGameUI/AmmoCount
-@onready var start_wave: Button = $InGameUI/StartWave
-@onready var tower_info: PanelContainer = $InGameUI/TowerInfo
+@onready var coin_label: Label = $InGameUI/RightSide/RightPanel/PanelContainer/HBoxContainer/CoinLabel
+
+@onready var start_wave: Button = $InGameUI/RightSide/StartWave
+@onready var tower_info: PanelContainer = $InGameUI/RightSide/RightPanel/TowerInfo
 
 const SHOTGUN_ICON = preload("res://assets/images/ui/shotgun_icon.png")
 const MG_ICON = preload("res://assets/images/ui/mg_icon.png")
@@ -29,6 +31,7 @@ static func create(player, level) -> MainUI:
 
 func _physics_process(delta: float) -> void:
     stamina_bar.value = float(player.stamina)
+    coin_label.text = str(player.money)
     
     if player.current_weapon == player.SHOTGUN:
         weapon_icon.texture = SHOTGUN_ICON
@@ -39,7 +42,7 @@ func _physics_process(delta: float) -> void:
     
     
 
-func _on_player_damage_taken():
+func _on_player_health_changed():
     health_bar.value = float(player.health)
     label.text = str(player.health)
 
@@ -50,7 +53,7 @@ func _on_wave_end():
     start_wave.disabled = false
 
 func _ready() -> void:
-    player.damage_taken.connect(_on_player_damage_taken)
+    player.health_changed.connect(_on_player_health_changed)
     level.wave_started.connect(_on_wave_start)
     level.wave_ended.connect(_on_wave_end)
 
@@ -58,7 +61,8 @@ func _ready() -> void:
 func _on_start_wave_pressed() -> void:
     level.start_wave()
 
-func _input(event):
-    if Input.is_action_just_pressed("prev_tower"):
-        print("right click")
-        tower_info.visible = true	
+func tower_mode():
+    tower_info.show()
+
+func normal_mode():
+    tower_info.hide()

@@ -2,9 +2,14 @@ extends CharacterBody2D
 
 class_name Entity
 
-signal damage_taken
+signal health_changed
 
-var health: int
+var health: int:
+    set(new_health):
+        health = new_health
+        health_changed.emit()
+    get:
+        return health
 var is_enemy: bool
 
 func die():
@@ -14,4 +19,3 @@ func take_damage(damage: int):
     health -= damage
     if health <= 0:
         die()
-    damage_taken.emit()

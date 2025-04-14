@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c45rit8pka2c5"]
 
-[ext_resource type="Script" uid="uid://bt0s1y5ex8hou" path="res://scenes/entities/piggy_bank.gd" id="1_eqev8"]
+[ext_resource type="Script" uid="uid://bt0s1y5ex8hou" path="res://scripts/entities/piggy_bank.gd" id="1_eqev8"]
 [ext_resource type="Texture2D" uid="uid://lfqq57f5woha" path="res://assets/images/piggy_bank.png" id="1_pwsjq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwsjq"]

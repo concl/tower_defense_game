@@ -6,7 +6,7 @@ class_name Player
 @onready var player_sprite: AnimatedSprite2D = $Sprites/PlayerSprite
 @onready var front_sprite: AnimatedSprite2D = $Sprites/FrontSprite
 @onready var back_sprite: AnimatedSprite2D = $Sprites/BackSprite
-
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 const CAR_LASER = preload("res://scenes/entities/projectiles/car_laser.tscn")
 
@@ -17,6 +17,9 @@ enum {
 }
 
 # Parameters
+const MAX_HEALTH = 100
+const MAX_AMMO = Vector3i(12, 90, 10)
+
 var dash_speed = 1200
 var dash_frames = 12
 
@@ -33,6 +36,7 @@ var max_stamina = 90
 var weapon_cooldowns = Vector3i(60, 12, 120)
 
 # State
+var money = 100
 var stamina = 90
 
 var is_dashing = false
@@ -54,6 +58,51 @@ var ammo = Vector3i(12, 90, 10)
 # Animation
 var current_animation = "idle"
 
+func remove_collision_layer(layer):
+    collision_layer &= ~(1 << (layer - 1))
+
+func add_collision_layer(layer):
+    collision_layer |= 1 << (layer - 1)
+
+func start_invincibility():
+    invincible_progress = invincible_frames
+    flash_cycle()
+
+func flash_cycle():
+    var flash_on = true
+    while invincible_progress > 0:
+        if flash_on:
+            # Set all sprites to flash red
+            player_sprite.material.set_shader_parameter("flash_amount", 1.0)
+            front_sprite.material.set_shader_parameter("flash_amount", 1.0)
+            back_sprite.material.set_shader_parameter("flash_amount", 1.0)
+        else:
+            # Set all sprites back to normal
+            player_sprite.material.set_shader_parameter("flash_amount", 0.0)
+            front_sprite.material.set_shader_parameter("flash_amount", 0.0)
+            back_sprite.material.set_shader_parameter("flash_amount", 0.0)
+        
+        # Wait 10 frames
+        for i in range(10):
+            await get_tree().process_frame
+            invincible_progress -= 1
+            if invincible_progress <= 0:
+                break
+
+        flash_on = !flash_on
+
+    # When invincibility ends, make sure everything is back to normal
+    player_sprite.material.set_shader_parameter("flash_amount", 0.0)
+    front_sprite.material.set_shader_parameter("flash_amount", 0.0)
+    back_sprite.material.set_shader_parameter("flash_amount", 0.0)
+
+func take_damage(damage: int):
+    if invincible_progress > 0:
+        return
+    
+    super(damage)
+    start_invincibility()
+
 func die():
     Globals.trigger_death()
 
@@ -73,6 +122,7 @@ func handle_jump(delta: float):
         velocity = velocity.move_toward(move_direc * SPEED, jump_accel * delta * 60)
     
     if jump_progress == 0:
+        add_collision_layer(2)
         is_jumping = false
     else:
         jump_progress -= 1
@@ -103,6 +153,7 @@ func handle_attack():
             laser.global_position = self.global_position
             laser.rotation = atan2(direction.y, direction.x)
             get_tree().current_scene.add_child(laser)
+        
     elif current_weapon == MG and ammo[MG] > 0:
         ammo[MG] -= 1
         cooldown_progress[MG] = weapon_cooldowns[MG]
@@ -229,6 +280,7 @@ func handle_input(delta: float):
     
     if Input.is_action_just_pressed("jump") and !is_jumping and stamina >= 30:
         stamina -= 30
+        remove_collision_layer(2)
         is_jumping = true
         is_dashing = false
         dash_progress = 0

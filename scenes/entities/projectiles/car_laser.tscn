@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2mwpnqmaqsy7"]
 
 [ext_resource type="Script" uid="uid://dg8koltv7k4qj" path="res://scripts/entities/projectiles/car_laser.gd" id="1_liwuy"]
-[ext_resource type="Texture2D" uid="uid://cn3836bht08yx" path="res://assets/images/laser.png" id="1_rktwn"]
+[ext_resource type="Texture2D" uid="uid://cn3836bht08yx" path="res://assets/images/projectiles/laser.png" id="1_rktwn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rktwn"]
 size = Vector2(12, 5)
@@ -19,7 +19,7 @@ texture = ExtResource("1_rktwn")
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(4, 2)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_rktwn")
