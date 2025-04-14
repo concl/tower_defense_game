@@ -2,6 +2,7 @@ extends Enemy
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 const LASANGA_BALL = preload("res://scenes/entities/projectiles/lasagna.tscn")
+const SHOCKWAVE = preload("res://scenes/entities/projectiles/shockwave.tscn")
 
 const GARF_SPEED = 180
 var state_duration = 0
@@ -83,7 +84,10 @@ func handle_animation():
 func handle_jump():
     if state_duration == 0:
         # landed on group and send shockwave
-        pass
+        var shock = SHOCKWAVE.instantiate()
+        shock.global_position = self.global_position
+        get_tree().current_scene.add_child(shock)
+        
 
 func shoot():
     for x in range(10):
