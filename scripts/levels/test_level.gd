@@ -24,7 +24,7 @@ const ENEMY_TYPES = {
     "yarn": preload("res://scenes/entities/enemies/yarn.tscn"),
     "mouse_bomber": preload("res://scenes/entities/enemies/mouse_bomber.tscn"),
     "fast_mouse": preload("res://scenes/entities/enemies/fast_enemy.tscn"),
-    "fat_enemy": preload("res://scripts/entities/enemies/fat_enemy.gd")
+    "fat_enemy": preload("res://scenes/entities/enemies/fat_enemy.tscn")
 }
 
 # Each element of waves is a list which contains dictionaries that describes subwaves

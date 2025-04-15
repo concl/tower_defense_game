@@ -19,12 +19,15 @@ const SHOTGUN_TOWER_CURSOR = preload("res://assets/images/cursors/shotgun_tower_
 @onready var weapon_icon: TextureRect = $InGameUI/WeaponIcon
 @onready var ammo_count: Label = $InGameUI/AmmoCount
 @onready var coin_label: Label = $InGameUI/RightSide/RightPanel/HBoxContainer/CoinLabel
+@onready var boss_bar: TextureProgressBar = $InGameUI/BossBar
 
 @onready var start_wave: Button = $InGameUI/RightSide/StartWave
 @onready var tower_info: PanelContainer = $InGameUI/RightSide/RightPanel/TowerInfo
 
 const SHOTGUN_ICON = preload("res://assets/images/ui/shotgun_icon.png")
 const MG_ICON = preload("res://assets/images/ui/mg_icon.png")
+
+var boss = null
 
 static func create(player, level) -> MainUI:
     var instance = MAIN_UI_SCENE.instantiate()
@@ -33,10 +36,16 @@ static func create(player, level) -> MainUI:
     
     return instance
 
+func boss_battle(boss):
+    boss = boss
+    boss_bar.show()
+
 
 func _physics_process(delta: float) -> void:
     stamina_bar.value = float(player.stamina)
     coin_label.text = str(player.money)
+    if boss:
+        boss_bar.value = boss.health
     
     if player.current_weapon == player.SHOTGUN:
         weapon_icon.texture = SHOTGUN_ICON

@@ -46,4 +46,3 @@ func play_sound(path):
         audio_player.stream = sound
         audio_player.play()
         audio_player.finished.connect(audio_player.queue_free)
-    

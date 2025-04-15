@@ -12,7 +12,6 @@ func _ready() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
     if body is Player:
         body.take_damage(10)
-        #collision_shape_2d.disabled = true
         fade_and_die()
 
 func _on_timer_timeout() -> void:
