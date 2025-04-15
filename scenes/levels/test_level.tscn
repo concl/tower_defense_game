@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=4 uid="uid://svx4jr0xhp06"]
+[gd_scene load_steps=15 format=4 uid="uid://svx4jr0xhp06"]
 
 [ext_resource type="Script" uid="uid://bdcdy07otahtp" path="res://scripts/levels/test_level.gd" id="1_v45ci"]
 [ext_resource type="PackedScene" uid="uid://dgabwwlqksg48" path="res://scenes/entities/player.tscn" id="1_yautc"]
 [ext_resource type="Texture2D" uid="uid://ywbd88la04v6" path="res://assets/images/tileset.png" id="2_fr1um"]
 [ext_resource type="PackedScene" uid="uid://cctgni2rprygv" path="res://scenes/entities/towers/tower_holder.tscn" id="5_6xh4u"]
 [ext_resource type="PackedScene" uid="uid://c45rit8pka2c5" path="res://scenes/entities/piggy_bank.tscn" id="5_48ne7"]
-[ext_resource type="PackedScene" uid="uid://imdrrm64oce2" path="res://scenes/entities/projectiles/shockwave.tscn" id="6_6xh4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v45ci"]
 texture = ExtResource("2_fr1um")
@@ -505,6 +504,3 @@ target_path = NodePath("../Player")
 
 [node name="PiggyBank" parent="." instance=ExtResource("5_48ne7")]
 position = Vector2(984, 576)
-
-[node name="Shockwave" parent="." instance=ExtResource("6_6xh4u")]
-position = Vector2(902, 470)
