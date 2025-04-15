@@ -1,9 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://dllg7m8c3b27q"]
+[gd_scene load_steps=10 format=3 uid="uid://dllg7m8c3b27q"]
 
 [ext_resource type="Theme" uid="uid://8v8xgpdy1iuh" path="res://assets/themes/menu_theme.tres" id="1_xqga4"]
 [ext_resource type="Script" uid="uid://evyuw34ycd4y" path="res://scripts/menus/main_menu.gd" id="2_ovrgc"]
 [ext_resource type="AudioStream" uid="uid://dj8gcu28chybj" path="res://assets/music/main_menu_theme.mp3" id="3_2o76q"]
 [ext_resource type="Texture2D" uid="uid://blrnfouh8pb27" path="res://assets/images/title_screen.PNG" id="3_6bivr"]
+
+[sub_resource type="Theme" id="Theme_chv3i"]
+Button/colors/font_color = Color(0.54902, 0.172549, 0.109804, 1)
+Button/colors/font_focus_color = Color(0.54902, 0.172549, 0.109804, 1)
+Button/colors/font_hover_color = Color(1, 0.980392, 0.811765, 1)
+Button/colors/font_hover_pressed_color = Color(0.776471, 0.423529, 0.227451, 1)
+Button/colors/font_outline_color = Color(0.54902, 0.172549, 0.109804, 1)
+Button/colors/font_pressed_color = Color(0.776471, 0.423529, 0.227451, 1)
 
 [sub_resource type="Animation" id="Animation_imvie"]
 length = 0.001
@@ -135,18 +143,22 @@ theme_override_constants/separation = 20
 
 [node name="NewGame" type="Button" parent="Main/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_chv3i")
 text = "New Game"
 
 [node name="Settings" type="Button" parent="Main/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_chv3i")
 text = "Settings"
 
 [node name="HowToPlay" type="Button" parent="Main/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_chv3i")
 text = "How to Play"
 
 [node name="Quit" type="Button" parent="Main/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_chv3i")
 text = "Quit"
 
 [node name="Settings" type="Control" parent="."]
@@ -184,6 +196,7 @@ layout_mode = 2
 
 [node name="Back" type="Button" parent="Settings/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_chv3i")
 text = "Back"
 
 [node name="HowToPlay" type="Control" parent="."]
@@ -238,6 +251,7 @@ Right Click - Tower Placement Mode
 [node name="Back2" type="Button" parent="HowToPlay/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = SubResource("Theme_chv3i")
 text = "Back"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dckpr8jj05fsm"]
+[gd_scene load_steps=4 format=3 uid="uid://dckpr8jj05fsm"]
 
 [ext_resource type="Theme" uid="uid://8v8xgpdy1iuh" path="res://assets/themes/menu_theme.tres" id="1_fwndu"]
 [ext_resource type="Script" uid="uid://6814hvsvenbr" path="res://scripts/menus/pause_menu.gd" id="2_7unhi"]
+
+[sub_resource type="Theme" id="Theme_chv3i"]
+Button/colors/font_color = Color(0.54902, 0.172549, 0.109804, 1)
+Button/colors/font_focus_color = Color(0.54902, 0.172549, 0.109804, 1)
+Button/colors/font_hover_color = Color(1, 0.980392, 0.811765, 1)
+Button/colors/font_hover_pressed_color = Color(0.776471, 0.423529, 0.227451, 1)
+Button/colors/font_outline_color = Color(0.54902, 0.172549, 0.109804, 1)
+Button/colors/font_pressed_color = Color(0.776471, 0.423529, 0.227451, 1)
 
 [node name="PauseMenu" type="Control"]
 z_index = 20
@@ -47,14 +55,17 @@ grow_vertical = 2
 
 [node name="Continue" type="Button" parent="Main/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_chv3i")
 text = "Continue"
 
 [node name="Settings" type="Button" parent="Main/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_chv3i")
 text = "Settings"
 
 [node name="MainMenu" type="Button" parent="Main/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_chv3i")
 text = "Main Menu"
 
 [node name="Settings" type="Control" parent="."]
