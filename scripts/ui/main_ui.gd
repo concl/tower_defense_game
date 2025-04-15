@@ -6,6 +6,7 @@ const MAIN_UI_SCENE = preload("res://scenes/ui/main_ui.tscn")
 
 var player: Player
 var level
+var boss: Enemy
 
 const CURSOR_NORMAL = preload("res://assets/images/cursors/cursor_normal.png")
 const DISPENSER_CURSOR = preload("res://assets/images/cursors/dispenser_cursor.png")
@@ -27,7 +28,7 @@ const SHOTGUN_TOWER_CURSOR = preload("res://assets/images/cursors/shotgun_tower_
 const SHOTGUN_ICON = preload("res://assets/images/ui/shotgun_icon.png")
 const MG_ICON = preload("res://assets/images/ui/mg_icon.png")
 
-var boss = null
+
 
 static func create(player, level) -> MainUI:
     var instance = MAIN_UI_SCENE.instantiate()
@@ -37,14 +38,16 @@ static func create(player, level) -> MainUI:
     return instance
 
 func boss_battle(boss):
-    boss = boss
+    self.boss = boss
     boss_bar.show()
 
 
 func _physics_process(delta: float) -> void:
     stamina_bar.value = float(player.stamina)
     coin_label.text = str(player.money)
-    if boss:
+    
+    
+    if boss != null:
         boss_bar.value = boss.health
     
     if player.current_weapon == player.SHOTGUN:

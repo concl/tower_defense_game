@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bod556tprc5j5"]
+
+[ext_resource type="VideoStream" uid="uid://cly8t5n44hou3" path="res://assets/winscreen.ogv" id="1_epfmt"]
+[ext_resource type="Script" uid="uid://d2i7hxbfu553e" path="res://scenes/cutscenes/win.gd" id="1_xjkgd"]
+
+[node name="Win" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xjkgd")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_epfmt")
+autoplay = true
+expand = true
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
