@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://680djaq6hr0g"]
+
+[ext_resource type="Texture2D" uid="uid://ddree7oa3inhi" path="res://assets/images/enemy/shotgunenemy_walk.png" id="1_laeg2"]
+[ext_resource type="Script" uid="uid://c4dd7bbli6pl2" path="res://scripts/entities/enemies/fat_enemy.gd" id="1_w4pq4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqmih"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4pq4"]
+atlas = ExtResource("1_laeg2")
+region = Rect2(0, 0, 25, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqmih"]
+atlas = ExtResource("1_laeg2")
+region = Rect2(25, 0, 25, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1l4xg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4pq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqmih")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FatEnemy" type="CharacterBody2D"]
+script = ExtResource("1_w4pq4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_rqmih")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_1l4xg")
+frame_progress = 0.852599

@@ -16,9 +16,16 @@ var is_jumping = false
 # launches lasagna in a circle
 var is_shooting = false
 
+
 func _physics_process(delta: float) -> void:
-    var player = get_tree().get_nodes_in_group("Player")[0]
+    var player = get_tree().get_first_node_in_group("Player")
     var direction = player.global_position - global_position
+    
+    if direction.y >= 30:
+        z_index = 0
+    else:
+        z_index = 2
+    
     if direction.length() != 0:
         direction = direction.normalized()
     else:

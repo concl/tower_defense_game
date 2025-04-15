@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://1axpv1lkkodo"]
+[gd_scene load_steps=13 format=4 uid="uid://1axpv1lkkodo"]
 
 [ext_resource type="Texture2D" uid="uid://ywbd88la04v6" path="res://assets/images/tileset.png" id="1_2doc8"]
 [ext_resource type="PackedScene" uid="uid://dgabwwlqksg48" path="res://scenes/entities/player.tscn" id="2_f5t7l"]
 [ext_resource type="PackedScene" uid="uid://dikdyq0kefimx" path="res://scenes/entities/enemies/gluttony.tscn" id="3_f5t7l"]
+[ext_resource type="Shader" uid="uid://cbvha11gl030b" path="res://assets/shaders/flash_red.gdshader" id="4_nhofj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nhofj"]
 texture = ExtResource("1_2doc8")
@@ -162,6 +163,12 @@ func _process(delta):
         global_position = global_position.lerp(desired_position, follow_speed * delta)
 "
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_diex5"]
+resource_local_to_scene = true
+shader = ExtResource("4_nhofj")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
 [node name="Marissa_Test_Level" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -208,6 +215,8 @@ limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
 script = SubResource("GDScript_huar3")
+target_path = NodePath("../Player")
 
 [node name="Gluttony" parent="." instance=ExtResource("3_f5t7l")]
+material = SubResource("ShaderMaterial_diex5")
 position = Vector2(339, 297)

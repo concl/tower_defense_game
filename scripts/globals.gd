@@ -38,5 +38,12 @@ func trigger_death():
     var death_screen = DEATH_SCREEN.instantiate()
     ui.add_child(death_screen)
     
-    
+func play_sound(path):
+    var sound = load(path)
+    if sound:
+        var audio_player = AudioStreamPlayer.new()
+        add_child(audio_player)
+        audio_player.stream = sound
+        audio_player.play()
+        audio_player.finished.connect(audio_player.queue_free)
     
