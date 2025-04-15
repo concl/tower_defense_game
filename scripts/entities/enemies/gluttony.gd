@@ -22,6 +22,10 @@ var is_jumping = false
 # launches lasagna in a circle
 var is_shooting = false
 
+func die():
+    Globals.win()
+    super()
+
 func _ready():
     health = 2000
     Globals.ui.boss_battle(self)
