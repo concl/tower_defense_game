@@ -12,6 +12,7 @@ var ui = null
 var _resolution = Vector2(1280, 720)
 
 func win():
+    ui.queue_free()
     get_tree().change_scene_to_packed(WIN)
 
 func _unhandled_input(event: InputEvent) -> void:

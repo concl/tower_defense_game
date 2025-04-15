@@ -27,7 +27,7 @@ func die():
     super()
 
 func _ready():
-    health = 2000
+    health = 8000
     Globals.ui.boss_battle(self)
 
 func _physics_process(delta: float) -> void:
