@@ -33,7 +33,7 @@ const ENEMY_TYPES = {
 
 var waves: Array = [
     [
-        {"enemy": "fast_mouse", "amount": 5, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 5, "spacing": 80, "spawnpoint": 0},
     ],
     [
         {"enemy": "yarn", "amount": 10, "spacing": 40, "spawnpoint": 0},

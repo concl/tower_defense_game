@@ -16,6 +16,8 @@ var is_jumping = false
 # launches lasagna in a circle
 var is_shooting = false
 
+func _ready():
+    health = 2000
 
 func _physics_process(delta: float) -> void:
     var player = get_tree().get_first_node_in_group("Player")
