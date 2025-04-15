@@ -33,28 +33,59 @@ const ENEMY_TYPES = {
 # the spacing (in frames) between each enemy, and the spawnpoint (0 for the main 
 # spawnpoint and 1 for the flank spawnpoint)
 
-var waves: Array = [
+var waves: Array = [ 
     [
         {"enemy": "gluttony", "amount": 1, "spacing": 80, "spawnpoint": 0},
     ],
     [
-        {"enemy": "yarn", "amount": 10, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 10, "spacing": 40, "spawnpoint": 1},
     ],
     [
-        {"enemy": "yarn", "amount": 12, "spacing": 20, "spawnpoint": 0},
-        {"enemy": "yarn", "amount": 12, "spacing": 20, "spawnpoint": 1}
+        {"enemy": "fat_enemy", "amount": 5, "spacing": 100, "spawnpoint": 0},
+    ],
+    [
+        {"enemy": "fast_mouse", "amount": 3, "spacing": 100, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 5, "spacing": 40, "spawnpoint": 1},
+        {"enemy": "yarn", "amount": 5, "spacing": 40, "spawnpoint": 0},
     ],
     [
         {"enemy": "mouse_bomber", "amount": 2, "spacing": 80, "spawnpoint": 0},
-        {"enemy": "yarn", "amount": 20, "spacing": 20, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 5, "spacing": 10, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 5, "spacing": 10, "spawnpoint": 1},
+    ],
+    [
+        {"enemy": "mouse_bomber", "amount": 5, "spacing": 40, "spawnpoint": 1},
+        {"enemy": "fat_enemy", "amount": 3, "spacing": 40, "spawnpoint": 1},
     ],
     [
         {"enemy": "mouse_bomber", "amount": 5, "spacing": 40, "spawnpoint": 0},
-        {"enemy": "yarn", "amount": 12, "spacing": 20, "spawnpoint": 1},
-        {"enemy": "mouse_bomber", "amount": 10, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 6, "spacing": 50, "spawnpoint": 1},
+        {"enemy": "mouse_bomber", "amount": 5, "spacing": 40, "spawnpoint": 1},
     ],
     [
-        {"enemy": "fast_mouse", "amount": 5, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "fast_mouse", "amount": 10, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 5, "spacing": 20, "spawnpoint": 1},
+        {"enemy": "fat_enemy", "amount": 5, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 5, "spacing": 20, "spawnpoint": 1},
+    ],
+    [
+        {"enemy": "mouse_bomber", "amount": 3, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "fast_mouse", "amount": 5, "spacing": 40, "spawnpoint": 1},
+        {"enemy": "mouse_bomber", "amount": 3, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "fast_mouse", "amount": 5, "spacing": 40, "spawnpoint": 1},
+        {"enemy": "fat_enemy", "amount": 1, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "fat_enemy", "amount": 1, "spacing": 40, "spawnpoint": 1},
+    ],
+    [
+        {"enemy": "fat_enemy", "amount": 10, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 20, "spacing": 50, "spawnpoint": 0},
+        {"enemy": "fat_enemy", "amount": 10, "spacing": 40, "spawnpoint": 1},
+        {"enemy": "yarn", "amount": 20, "spacing": 50, "spawnpoint": 0},
+        {"enemy": "mouse_bomber", "amount": 10, "spacing": 40, "spawnpoint": 1},
+        {"enemy": "fast_mouse", "amount": 10, "spacing": 40, "spawnpoint": 1},
+        {"enemy": "yarn", "amount": 10, "spacing": 50, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 10, "spacing": 50, "spawnpoint": 1},
+        {"enemy": "yarn", "amount": 10, "spacing": 50, "spawnpoint": 0},
     ]
 ]
 
