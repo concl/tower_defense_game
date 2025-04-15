@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dw6nlymkxhlrc"]
+[gd_scene load_steps=4 format=3 uid="uid://dw6nlymkxhlrc"]
 
 [ext_resource type="Theme" uid="uid://8v8xgpdy1iuh" path="res://assets/themes/menu_theme.tres" id="1_j0ehl"]
 [ext_resource type="Script" uid="uid://c81v47cxnranf" path="res://scripts/menus/death_screen.gd" id="2_njuei"]
+
+[sub_resource type="Theme" id="Theme_chv3i"]
+Button/colors/font_color = Color(0.54902, 0.172549, 0.109804, 1)
+Button/colors/font_focus_color = Color(0.54902, 0.172549, 0.109804, 1)
+Button/colors/font_hover_color = Color(1, 0.980392, 0.811765, 1)
+Button/colors/font_hover_pressed_color = Color(0.776471, 0.423529, 0.227451, 1)
+Button/colors/font_outline_color = Color(0.54902, 0.172549, 0.109804, 1)
+Button/colors/font_pressed_color = Color(0.776471, 0.423529, 0.227451, 1)
 
 [node name="DeathScreen" type="Control"]
 z_index = 2
@@ -46,6 +54,7 @@ text = "GAME OVER"
 [node name="MainMenu" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = SubResource("Theme_chv3i")
 text = "Main Menu"
 
 [connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
