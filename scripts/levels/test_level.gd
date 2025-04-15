@@ -24,7 +24,8 @@ const ENEMY_TYPES = {
     "yarn": preload("res://scenes/entities/enemies/yarn.tscn"),
     "mouse_bomber": preload("res://scenes/entities/enemies/mouse_bomber.tscn"),
     "fast_mouse": preload("res://scenes/entities/enemies/fast_enemy.tscn"),
-    "fat_enemy": preload("res://scenes/entities/enemies/fat_enemy.tscn")
+    "fat_enemy": preload("res://scenes/entities/enemies/fat_enemy.tscn"),
+    "gluttony": preload("res://scenes/entities/enemies/gluttony.tscn")
 }
 
 # Each element of waves is a list which contains dictionaries that describes subwaves
@@ -34,7 +35,7 @@ const ENEMY_TYPES = {
 
 var waves: Array = [
     [
-        {"enemy": "yarn", "amount": 5, "spacing": 80, "spawnpoint": 0},
+        {"enemy": "gluttony", "amount": 1, "spacing": 80, "spawnpoint": 0},
     ],
     [
         {"enemy": "yarn", "amount": 10, "spacing": 40, "spawnpoint": 0},

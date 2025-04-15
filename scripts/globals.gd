@@ -5,6 +5,8 @@ const MAIN_MENU = preload("res://scenes/menus/main_menu.tscn")
 const PAUSE_MENU = preload("res://scenes/menus/pause_menu.tscn")
 const DEATH_SCREEN = preload("res://scenes/ui/death_screen.tscn")
 
+
+
 var ui = null
 
 var _resolution = Vector2(1280, 720)

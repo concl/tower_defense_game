@@ -4,6 +4,7 @@ extends Enemy
 const LASANGA_BALL = preload("res://scenes/entities/projectiles/lasagna.tscn")
 const SHOCKWAVE = preload("res://scenes/entities/projectiles/shockwave.tscn")
 
+const TRACK = false
 const GARF_SPEED = 180
 
 var stamina = 240
