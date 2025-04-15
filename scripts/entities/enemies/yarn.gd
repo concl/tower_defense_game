@@ -9,11 +9,11 @@ const BALL_SPEED = 400
 const TRACK = true
 const SPEED = 200
 
-var attack_cooldown = 240
+var attack_cooldown = 120
 var cooldown_progress = 90
 
 func attack():
-    var player = get_tree().get_nodes_in_group("Player")[0]
+    var player = get_tree().get_first_node_in_group("Player")
     
     var direction = player.global_position - global_position
     if direction.length() != 0:
@@ -29,7 +29,7 @@ func attack():
     
 
 func _ready() -> void:
-    health = 32
+    health = 35
 
 func _physics_process(delta: float) -> void:
     var path_direc = get_parent().get_path_direction()
@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
         
     
     if cooldown_progress == 0:
-        cooldown_progress = 60
+        cooldown_progress = attack_cooldown
         attack()
     else:
         cooldown_progress -= 1

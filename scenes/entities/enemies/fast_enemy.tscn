@@ -50,7 +50,7 @@ use_parent_material = true
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_7fxib")
 autoplay = "default"
-frame_progress = 0.655698
+frame_progress = 0.712742
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_61kcl")

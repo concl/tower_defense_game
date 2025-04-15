@@ -1,15 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://680djaq6hr0g"]
+[gd_scene load_steps=10 format=3 uid="uid://680djaq6hr0g"]
 
-[ext_resource type="Shader" uid="uid://cbvha11gl030b" path="res://assets/shaders/flash_red.gdshader" id="1_1l4xg"]
 [ext_resource type="Texture2D" uid="uid://ddree7oa3inhi" path="res://assets/images/enemy/shotgunenemy_walk.png" id="1_laeg2"]
 [ext_resource type="Script" uid="uid://c4dd7bbli6pl2" path="res://scripts/entities/enemies/fat_enemy.gd" id="1_w4pq4"]
 [ext_resource type="Texture2D" uid="uid://c2jvsedubclmq" path="res://assets/images/enemy/shotgunenemy_attack.png" id="3_rqmih"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_13b13"]
-resource_local_to_scene = true
-shader = ExtResource("1_1l4xg")
-shader_parameter/flash_amount = 0.0
-shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rqmih"]
 
@@ -55,9 +48,6 @@ animations = [{
 }]
 
 [node name="FatEnemy" type="CharacterBody2D"]
-material = SubResource("ShaderMaterial_13b13")
-collision_layer = 2
-collision_mask = 0
 script = ExtResource("1_w4pq4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -65,7 +55,6 @@ scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_rqmih")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-use_parent_material = true
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_1l4xg")
 animation = &"fire"
