@@ -16,6 +16,8 @@ func die():
     queue_free()
 
 func take_damage(damage: int):
+    if health <= 0: return
+    
     health -= damage
     if health <= 0:
         die()

@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://qqstcbad7v1r"]
+
+[ext_resource type="Script" uid="uid://4gi6oe3k3h4b" path="res://scripts/entities/towers/shotgun_tower.gd" id="1_lk7pq"]
+[ext_resource type="Texture2D" uid="uid://d0a53hpqw5taf" path="res://assets/images/towers/shotgun_idle_1.png" id="2_vs5in"]
+[ext_resource type="Texture2D" uid="uid://djb65yxt33iqh" path="res://assets/images/towers/shotgun_idle_2.png" id="3_yihfn"]
+[ext_resource type="Texture2D" uid="uid://bao18gb5f6xa1" path="res://assets/images/towers/shotgun_idle_3.png" id="4_pa5wv"]
+[ext_resource type="Texture2D" uid="uid://b0bgiu6qaa4c5" path="res://assets/images/towers/shotgun_attack.png" id="5_w80gq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfljw"]
+atlas = ExtResource("2_vs5in")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tlgn"]
+atlas = ExtResource("5_w80gq")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_woxc0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfljw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yihfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pa5wv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 0.75
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tlgn")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y4kev"]
+radius = 300.0
+
+[node name="ShotgunTower" type="Node2D"]
+script = ExtResource("1_lk7pq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_woxc0")
+animation = &"shoot"
+autoplay = "idle"
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_y4kev")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="Spawnpoint" type="Node2D" parent="."]
+position = Vector2(0, 11)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

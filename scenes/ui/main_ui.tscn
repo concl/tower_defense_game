@@ -143,6 +143,7 @@ stretch_mode = 5
 [node name="CoinLabel" type="Label" parent="InGameUI/RightSide/RightPanel/HBoxContainer"]
 layout_mode = 2
 text = "100"
+horizontal_alignment = 1
 
 [node name="TowerInfo" type="PanelContainer" parent="InGameUI/RightSide/RightPanel"]
 visible = false
@@ -155,26 +156,49 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/v_separation = 40
 
-[node name="Dispenser" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
+layout_mode = 2
+
+[node name="Dispenser" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = ExtResource("10_8s2gp")
 texture_pressed = ExtResource("11_chv3i")
 stretch_mode = 5
 
-[node name="Shooter" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
+[node name="Label" type="Label" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "50"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
+layout_mode = 2
+
+[node name="Shooter" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = ExtResource("11_ampf0")
 texture_pressed = ExtResource("12_chv3i")
 stretch_mode = 5
 
-[node name="Shotgun" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
+[node name="Label" type="Label" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/VBoxContainer2"]
+layout_mode = 2
+text = "50"
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
+layout_mode = 2
+
+[node name="Shotgun" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = ExtResource("13_h2n7m")
 texture_pressed = ExtResource("14_xfu30")
 stretch_mode = 5
+
+[node name="Label" type="Label" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/VBoxContainer3"]
+layout_mode = 2
+text = "100"
 
 [node name="Trash" type="TextureButton" parent="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
@@ -186,8 +210,8 @@ stretch_mode = 5
 layout_mode = 2
 text = "Start Wave"
 
-[connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/Dispenser" to="." method="_on_dispenser_pressed"]
-[connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/Shooter" to="." method="_on_shooter_pressed"]
-[connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/Shotgun" to="." method="_on_shotgun_pressed"]
+[connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/VBoxContainer/Dispenser" to="." method="_on_dispenser_pressed"]
+[connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/VBoxContainer2/Shooter" to="." method="_on_shooter_pressed"]
+[connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/VBoxContainer3/Shotgun" to="." method="_on_shotgun_pressed"]
 [connection signal="pressed" from="InGameUI/RightSide/RightPanel/TowerInfo/GridContainer/Trash" to="." method="_on_trash_pressed"]
 [connection signal="pressed" from="InGameUI/RightSide/StartWave" to="." method="_on_start_wave_pressed"]

@@ -39,9 +39,13 @@ var waves: Array = [
         {"enemy": "yarn", "amount": 12, "spacing": 20, "spawnpoint": 1}
     ],
     [
+        {"enemy": "mouse_bomber", "amount": 2, "spacing": 80, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 20, "spacing": 20, "spawnpoint": 0},
+    ],
+    [
         {"enemy": "mouse_bomber", "amount": 5, "spacing": 40, "spawnpoint": 0},
-        {"enemy": "yarn", "amount": 10, "spacing": 20, "spawnpoint": 1},
-        {"enemy": "mouse_bomber", "amount": 5, "spacing": 40, "spawnpoint": 0},
+        {"enemy": "yarn", "amount": 12, "spacing": 20, "spawnpoint": 1},
+        {"enemy": "mouse_bomber", "amount": 10, "spacing": 40, "spawnpoint": 0},
     ]
 ]
 

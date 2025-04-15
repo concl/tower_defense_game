@@ -1,0 +1,56 @@
+extends Node2D
+
+const TOWER_BALL = preload("res://scenes/entities/projectiles/tower_ball.tscn")
+@onready var range: Area2D = $Range
+@onready var cooldown: Timer = $Cooldown
+@onready var spawnpoint: Node2D = $Spawnpoint
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
+var can_shoot = false
+var BALL_SPEED = 1600
+
+func _on_cooldown_timeout() -> void:
+    can_shoot = true
+
+
+func attack():
+    var target = null
+    var best = INF
+    for candidate in range.get_overlapping_bodies():
+        if candidate is Enemy:
+            var dist =  (candidate.global_position - spawnpoint.global_position).length()
+            if dist < best:
+                target = candidate
+                best = dist
+        
+    if target:
+        can_shoot = false
+        cooldown.start()
+        
+        var direc = (target.global_position - spawnpoint.global_position)
+        direc = direc.normalized() if direc.length() > 0 else Vector2(1,0)
+        
+        if direc.x >= 0:
+            animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
+        else:
+            animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
+        
+        for x in range(10):
+            var proj = TOWER_BALL.instantiate()
+            var random_angle = randf_range(-0.1, 0.1)
+            
+            proj.global_position = spawnpoint.global_position
+            proj.linear_velocity = direc.rotated(random_angle) * BALL_SPEED
+            get_tree().current_scene.add_child(proj)
+        
+        animated_sprite_2d.play("shoot")
+        
+
+func _physics_process(delta: float) -> void:
+    if can_shoot:
+        attack()
+    
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+    animated_sprite_2d.play("idle")

@@ -225,11 +225,14 @@ text = "Controls:
 
 W, A, S, D - Movement
 
-Shift - Dash toward a given direction
+Shift - Dash toward a given direction (Must be pressing a movement key)
 
 Space - Jump
 
 Click - Shoot toward the Mouse
+
+Right Click - Tower Placement Mode
+
 "
 
 [node name="Back2" type="Button" parent="HowToPlay/PanelContainer/VBoxContainer"]

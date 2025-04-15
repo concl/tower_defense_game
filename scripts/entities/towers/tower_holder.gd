@@ -6,9 +6,10 @@ extends Node2D
 const TOWERS = [
     preload("res://scenes/entities/towers/dispenser.tscn"),
     preload("res://scenes/entities/towers/shooter_tower.tscn"),
+    preload("res://scenes/entities/towers/shotgun_tower.tscn"),
 ]
 
-const PRICES = [50, 50, 50]
+const PRICES = [50, 50, 100]
 
 func _physics_process(delta: float) -> void:
     pass

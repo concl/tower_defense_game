@@ -140,21 +140,22 @@ func handle_attack():
     if current_weapon == SHOTGUN and ammo[SHOTGUN] > 0:
         ammo[SHOTGUN] -= 1
         cooldown_progress[SHOTGUN] = weapon_cooldowns[SHOTGUN]
+        
+        var mouse_pos = get_global_mouse_position()
+        
+        var direction = mouse_pos - self.global_position
+        if direction.length() != 0:
+            direction = direction.normalized()
+        else:
+            direction = Vector2(1,0)
+        
         for x in range(10):
             var laser = CAR_LASER.instantiate()
-            var mouse_pos = get_global_mouse_position()
-            
-            var direction = mouse_pos - self.global_position
-            if direction.length() != 0:
-                direction = direction.normalized()
-            else:
-                direction = Vector2(1,0)
-            
             var random_angle = randf_range(-0.1, 0.1)
-            direction = direction.rotated(random_angle)
-            laser.linear_velocity = direction * 2000
+            var new_direc = direction.rotated(random_angle)
+            laser.linear_velocity = new_direc * 2000
             laser.global_position = self.global_position
-            laser.rotation = atan2(direction.y, direction.x)
+            laser.rotation = atan2(new_direc.y, new_direc.x)
             get_tree().current_scene.add_child(laser)
         
     elif current_weapon == MG and ammo[MG] > 0:
