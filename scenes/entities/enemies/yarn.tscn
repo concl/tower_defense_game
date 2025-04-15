@@ -1,8 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://cucy3b7eagd5a"]
+[gd_scene load_steps=10 format=3 uid="uid://cucy3b7eagd5a"]
 
 [ext_resource type="Texture2D" uid="uid://cb5ig77iwp7ar" path="res://assets/images/enemy/yarn.png" id="1_662ui"]
 [ext_resource type="Script" uid="uid://w70qthg0fuck" path="res://scripts/entities/enemies/yarn.gd" id="1_p4tli"]
+[ext_resource type="Shader" uid="uid://cbvha11gl030b" path="res://assets/shaders/flash_red.gdshader" id="1_rw2mj"]
 [ext_resource type="Texture2D" uid="uid://jfwn0au2a6xk" path="res://assets/images/enemy/yarn_tail.png" id="2_4ynaf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f0wni"]
+resource_local_to_scene = true
+shader = ExtResource("1_rw2mj")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p4tli"]
 radius = 7.9
@@ -45,18 +52,22 @@ _data = {
 }
 
 [node name="Yarn" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_f0wni")
 scale = Vector2(4, 4)
 collision_layer = 2
 script = ExtResource("1_p4tli")
 
 [node name="Sprites" type="Node2D" parent="."]
+use_parent_material = true
 
 [node name="YarnTail" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 position = Vector2(2.5, 4.5)
 texture = ExtResource("2_4ynaf")
 offset = Vector2(8, 0)
 
 [node name="Ball" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 texture = ExtResource("1_662ui")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

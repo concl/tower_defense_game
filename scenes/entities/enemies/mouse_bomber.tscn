@@ -1,8 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://lnost64mvv2w"]
+[gd_scene load_steps=16 format=3 uid="uid://lnost64mvv2w"]
 
+[ext_resource type="Shader" uid="uid://cbvha11gl030b" path="res://assets/shaders/flash_red.gdshader" id="1_1fw3o"]
 [ext_resource type="Script" uid="uid://cj8cswusx1m0y" path="res://scripts/entities/enemies/mouse_bomber.gd" id="1_d8x6v"]
 [ext_resource type="Texture2D" uid="uid://yb04sgtw5i7f" path="res://assets/images/enemy/mouse_bomber.png" id="2_abpra"]
 [ext_resource type="Texture2D" uid="uid://dauah4k4x3pxy" path="res://assets/images/enemy/explosion.png" id="2_wdu7m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8dj8b"]
+resource_local_to_scene = true
+shader = ExtResource("1_1fw3o")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wdu7m"]
 
@@ -68,6 +75,7 @@ radius = 50.0
 radius = 30.0
 
 [node name="MouseBomber" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_8dj8b")
 scale = Vector2(2, 2)
 collision_layer = 8
 collision_mask = 8
@@ -77,6 +85,7 @@ script = ExtResource("1_d8x6v")
 shape = SubResource("CircleShape2D_wdu7m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_d8x6v")
 animation = &"run"
 autoplay = "run"

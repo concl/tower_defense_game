@@ -1,8 +1,15 @@
-[gd_scene load_steps=20 format=3 uid="uid://dikdyq0kefimx"]
+[gd_scene load_steps=22 format=3 uid="uid://dikdyq0kefimx"]
 
 [ext_resource type="Script" uid="uid://cmnb8xgmfxvsj" path="res://scripts/entities/enemies/gluttony.gd" id="1_6ujhh"]
 [ext_resource type="Texture2D" uid="uid://bgdwnol5e2dgv" path="res://assets/images/garfield_frames/jump.png" id="1_dsogk"]
+[ext_resource type="Shader" uid="uid://cbvha11gl030b" path="res://assets/shaders/flash_red.gdshader" id="1_uq8ac"]
 [ext_resource type="Texture2D" uid="uid://dru2xmqr5074b" path="res://assets/images/garfield_frames/bounce.png" id="2_3fgre"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i18pd"]
+resource_local_to_scene = true
+shader = ExtResource("1_uq8ac")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m4fsh"]
 atlas = ExtResource("2_3fgre")
@@ -119,11 +126,13 @@ animations = [{
 radius = 96.0052
 
 [node name="Gluttony" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_i18pd")
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_6ujhh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+use_parent_material = true
 position = Vector2(0, -481)
 scale = Vector2(8, 8.01667)
 sprite_frames = SubResource("SpriteFrames_m4fsh")

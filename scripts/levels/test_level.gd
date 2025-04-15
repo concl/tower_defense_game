@@ -22,7 +22,8 @@ const TRACK_FOLLOWER = preload("res://scenes/entities/track_follower.tscn")
 const ENEMY_TYPES = {
     "test_enemy": preload("res://scenes/entities/enemies/test_enemy.tscn"),
     "yarn": preload("res://scenes/entities/enemies/yarn.tscn"),
-    "mouse_bomber": preload("res://scenes/entities/enemies/mouse_bomber.tscn")
+    "mouse_bomber": preload("res://scenes/entities/enemies/mouse_bomber.tscn"),
+    "fast_mouse": preload("res://scenes/entities/enemies/fast_enemy.tscn")
 }
 
 # Each element of waves is a list which contains dictionaries that describes subwaves
@@ -31,6 +32,9 @@ const ENEMY_TYPES = {
 # spawnpoint and 1 for the flank spawnpoint)
 
 var waves: Array = [
+    [
+        {"enemy": "fast_mouse", "amount": 5, "spacing": 40, "spawnpoint": 0},
+    ],
     [
         {"enemy": "yarn", "amount": 10, "spacing": 40, "spawnpoint": 0},
     ],
@@ -46,6 +50,9 @@ var waves: Array = [
         {"enemy": "mouse_bomber", "amount": 5, "spacing": 40, "spawnpoint": 0},
         {"enemy": "yarn", "amount": 12, "spacing": 20, "spawnpoint": 1},
         {"enemy": "mouse_bomber", "amount": 10, "spacing": 40, "spawnpoint": 0},
+    ],
+    [
+        {"enemy": "fast_mouse", "amount": 5, "spacing": 40, "spawnpoint": 0},
     ]
 ]
 

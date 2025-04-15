@@ -2,9 +2,7 @@ extends Pickup
 
 @onready var area_2d: Area2D = $Area2D
 
-var health_given = 15
-var ammo_given = Vector3i(1, 5, 1)
-
+const MONEY_GIVEN = 3
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
     if body is Player:
@@ -12,7 +10,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
         area_2d.queue_free()
     
 func consume():
-    target.money += 5
+    target.money += 3
     super()
 
 

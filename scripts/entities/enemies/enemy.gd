@@ -2,9 +2,20 @@ extends Entity
 
 class_name Enemy
 
+
 const COIN = preload("res://scenes/entities/pickups/coin.tscn")
 const DROP_SPEED = 100
 var money_dropped = 2
+
+
+func take_damage(damage):
+    
+    self.material.set_shader_parameter("flash_amount", 1.0)
+    for frame in range(10):
+        await get_tree().process_frame
+    self.material.set_shader_parameter("flash_amount", 0.0)
+    
+    super(damage)
 
 func die():
     
